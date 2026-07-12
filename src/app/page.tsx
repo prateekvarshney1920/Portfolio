@@ -7,14 +7,17 @@ import { Skills } from '@/components/sections/Skills';
 import { TechStack } from '@/components/sections/TechStack';
 import { Projects } from '@/components/sections/Projects';
 import { Contact } from '@/components/sections/Contact';
+import { PageLoader } from '@/components/ui/PageLoader';
 
 /**
  * Home — the single-page portfolio landing page.
  * Assembles all sections in order with Navbar and Footer framing the page.
+ * PageLoader provides a cinematic boot sequence on initial load.
  */
 export default function Home() {
   return (
     <>
+      <PageLoader />
       <Navbar />
       <main>
         <Hero />

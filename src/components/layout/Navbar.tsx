@@ -1,7 +1,7 @@
 'use client';
 
-import { useState, useEffect, useCallback } from 'react';
-import { motion, AnimatePresence } from 'motion/react';
+import { useState, useEffect, useCallback, useRef } from 'react';
+import { motion, AnimatePresence, useScroll, useMotionValueEvent } from 'motion/react';
 import { Menu, X, ArrowUpRight } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { navLinks } from '@/content/data';
@@ -12,21 +12,37 @@ import { useReducedMotion } from '@/hooks/use-reduced-motion';
 /**
  * Navbar
  * ---------------------------------------------------------------------------
- * Sticky glass-morphism navigation bar. Transparent on top, glass-filled on
- * scroll. Mobile hamburger with animated slide-in panel. Smooth-scrolls to
- * section anchors.
+ * Premium glass-morphism navigation bar.
+ * - Transparent at top, glass-filled on scroll
+ * - Hides on scroll down, reveals on scroll up
+ * - Floating effect with enhanced backdrop blur
+ * - Animated logo with hover glow
+ * - Mobile hamburger with animated slide-in panel
  */
 export function Navbar() {
   const [scrolled, setScrolled] = useState(false);
+  const [hidden, setHidden] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
   const prefersReducedMotion = useReducedMotion();
+  const lastScrollY = useRef(0);
 
-  useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 32);
-    onScroll();
-    window.addEventListener('scroll', onScroll, { passive: true });
-    return () => window.removeEventListener('scroll', onScroll);
-  }, []);
+  const { scrollY } = useScroll();
+
+  // Track scroll direction for hide/reveal
+  useMotionValueEvent(scrollY, 'change', (latest) => {
+    const previous = lastScrollY.current;
+    const direction = latest > previous ? 'down' : 'up';
+    lastScrollY.current = latest;
+
+    setScrolled(latest > 32);
+
+    // Only hide/reveal after scrolling past 200px threshold
+    if (latest > 200) {
+      setHidden(direction === 'down');
+    } else {
+      setHidden(false);
+    }
+  });
 
   // Lock body scroll when mobile menu is open
   useEffect(() => {
@@ -48,29 +64,51 @@ export function Navbar() {
     <>
       <motion.header
         initial={{ y: -80, opacity: 0 }}
-        animate={{ y: 0, opacity: 1 }}
-        transition={{ duration: DURATION.slow, ease: EASING.outSoft, delay: 0.1 }}
+        animate={{
+          y: hidden ? -100 : 0,
+          opacity: hidden ? 0 : 1,
+        }}
+        transition={{
+          duration: prefersReducedMotion ? 0 : 0.35,
+          ease: [0.16, 1, 0.3, 1],
+          ...(hidden ? {} : { delay: 0.1 }),
+        }}
         className={cn(
-          'fixed top-0 right-0 left-0 z-[var(--z-nav)] transition-[background-color,border-color,backdrop-filter] duration-300',
+          'fixed top-0 right-0 left-0 z-[var(--z-nav)] transition-[background-color,border-color,box-shadow] duration-500',
           scrolled
-            ? 'border-b border-[var(--glass-base-border)] bg-[var(--surface-overlay)] backdrop-blur-xl'
+            ? 'border-b border-[rgba(255,255,255,0.06)] bg-[rgba(3,3,4,0.72)] backdrop-blur-xl shadow-[0_4px_30px_rgba(0,0,0,0.3)]'
             : 'border-b border-transparent bg-transparent',
+          scrolled && 'translate-y-0',
         )}
+        style={{
+          backdropFilter: scrolled ? 'blur(20px) saturate(1.2)' : 'none',
+          WebkitBackdropFilter: scrolled ? 'blur(20px) saturate(1.2)' : 'none',
+        }}
       >
         <nav
           className="mx-auto flex h-16 max-w-page items-center justify-between px-6 md:h-[4.5rem] md:px-12"
           aria-label="Main navigation"
         >
-          {/* Logo / Name */}
+          {/* Logo / Name — with hover glow + rotation */}
           <a
             href="#"
             onClick={(e) => {
               e.preventDefault();
               window.scrollTo({ top: 0, behavior: prefersReducedMotion ? 'auto' : 'smooth' });
             }}
-            className="text-fg group relative font-display text-lg font-bold tracking-tight"
+            className="text-fg group relative font-display text-lg font-bold tracking-tight transition-all duration-300"
           >
-            <GradientText animate="shimmer">PV</GradientText>
+            <motion.span
+              initial={{ opacity: 0, filter: 'blur(4px)' }}
+              animate={{ opacity: 1, filter: 'blur(0px)' }}
+              transition={{ delay: 0.3, duration: 0.6 }}
+              className="inline-block transition-transform duration-300 group-hover:rotate-6"
+              style={{
+                filter: 'drop-shadow(0 0 8px rgba(6, 182, 212, 0.15))',
+              }}
+            >
+              <GradientText animate="shimmer">PV</GradientText>
+            </motion.span>
           </a>
 
           {/* Desktop Links */}

@@ -413,3 +413,72 @@
     background-position: 100% 50%;
   }
 }
+
+/* ── Cinematic Hero Keyframes ─────────────────────────────────────────────── */
+
+@keyframes hero-mesh-drift {
+  0% { background-position: 0% 0%; }
+  25% { background-position: 100% 50%; }
+  50% { background-position: 50% 100%; }
+  75% { background-position: 0% 50%; }
+  100% { background-position: 0% 0%; }
+}
+
+@keyframes hero-aurora-sweep {
+  0% { transform: rotate(0deg) scale(1.2); opacity: 0.04; }
+  33% { transform: rotate(120deg) scale(1.4); opacity: 0.07; }
+  66% { transform: rotate(240deg) scale(1.1); opacity: 0.05; }
+  100% { transform: rotate(360deg) scale(1.2); opacity: 0.04; }
+}
+
+@keyframes hero-float-1 {
+  0%, 100% { transform: translate3d(0, 0, 0); }
+  50% { transform: translate3d(30px, -40px, 0); }
+}
+
+@keyframes hero-float-2 {
+  0%, 100% { transform: translate3d(0, 0, 0); }
+  50% { transform: translate3d(-25px, 35px, 0); }
+}
+
+@keyframes hero-float-3 {
+  0%, 100% { transform: translate3d(0, 0, 0); }
+  50% { transform: translate3d(20px, 25px, 0); }
+}
+
+@keyframes hero-portrait-float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-4px); }
+}
+
+@keyframes scroll-breathe {
+  0%, 100% { opacity: 0.5; transform: scale(1); }
+  50% { opacity: 1; transform: scale(1.05); }
+}
+
+@keyframes scroll-arrow-bounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(3px); }
+}
+
+@keyframes scroll-ring-spin {
+  0% { stroke-dashoffset: 157; }
+  100% { stroke-dashoffset: 0; }
+}
+
+@keyframes cursor-pulse {
+  0%, 100% { box-shadow: 0 0 8px rgba(6, 182, 212, 0.3); }
+  50% { box-shadow: 0 0 16px rgba(6, 182, 212, 0.6); }
+}
+
+@keyframes loader-flash {
+  0% { opacity: 0; }
+  50% { opacity: 0.15; }
+  100% { opacity: 0; }
+}
+
+@layer components {
+  .hero-cursor-none {
+    cursor: none;
+  }
+}
