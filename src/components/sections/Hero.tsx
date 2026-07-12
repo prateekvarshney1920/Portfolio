@@ -53,6 +53,16 @@ export function Hero() {
         />
       </div>
 
+      {/* Ambient Silhouette Background Watermark */}
+      <div
+        className="pointer-events-none absolute inset-0 z-0 opacity-[0.08] mix-blend-screen bg-cover bg-center md:bg-right-bottom select-none"
+        style={{
+          backgroundImage: "url('/images/portrait.png')",
+          backgroundRepeat: 'no-repeat',
+        }}
+        aria-hidden="true"
+      />
+
       <Container className="relative z-[1] flex flex-col items-center text-center">
         {/* Eyebrow Label */}
         <motion.div
