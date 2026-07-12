@@ -11,39 +11,42 @@
    ============================================================================= */
 :root {
   /* ---- Neutral ramp ---- */
-  --neutral-950: #050507;
-  --neutral-900: #0b0b12;
-  --neutral-850: #0f1018;
-  --neutral-800: #14151f;
-  --neutral-700: #1c1e2a;
-  --neutral-600: #2a2d3d;
-  --neutral-500: #3d4152;
-  --neutral-400: #5a5f72;
-  --neutral-300: #6b7080;
-  --neutral-200: #a2a6b4;
-  --neutral-100: #c9ccd6;
-  --neutral-50: #f5f6f8;
+  --neutral-950: #030304;
+  --neutral-900: #070709;
+  --neutral-850: #0b0c10;
+  --neutral-800: #101116;
+  --neutral-700: #181920;
+  --neutral-600: #222430;
+  --neutral-500: #35384a;
+  --neutral-400: #50546c;
+  --neutral-300: #626782;
+  --neutral-200: #9398b0;
+  --neutral-100: #c1c5d6;
+  --neutral-50: #f0f2f8;
 
   /* ---- Brand / accent ---- */
-  --brand-blue: #4f7dff;
-  --brand-blue-hover: #6b92ff;
-  --brand-blue-active: #3b6ae8;
-  --brand-violet: #7c5cff;
-  --brand-violet-hover: #9a80ff;
-  --brand-cyan: #22d3ee;
+  --brand-blue: #06b6d4; /* Electric Cyan */
+  --brand-blue-hover: #22d3ee;
+  --brand-blue-active: #0891b2;
+  --brand-violet: #f97316; /* Neon Red-Orange */
+  --brand-violet-hover: #fb923c;
+  --brand-cyan: #06b6d4;
 
   /* ---- Gradients ---- */
-  --gradient-signature: linear-gradient(120deg, #4f7dff 0%, #7c5cff 100%);
+  --gradient-signature: linear-gradient(120deg, #06b6d4 0%, #f97316 100%);
   --gradient-signature-soft: linear-gradient(
     120deg,
-    rgba(79, 125, 255, 0.16) 0%,
-    rgba(124, 92, 255, 0.16) 100%
+    rgba(6, 182, 212, 0.15) 0%,
+    rgba(249, 115, 22, 0.15) 100%
   );
   --gradient-aurora: radial-gradient(
-    60% 60% at 50% 0%,
-    rgba(79, 125, 255, 0.18) 0%,
-    rgba(124, 92, 255, 0.1) 45%,
-    transparent 75%
+    ellipse 60% 50% at 20% 10%,
+    rgba(6, 182, 212, 0.14) 0%,
+    transparent 80%
+  ), radial-gradient(
+    ellipse 60% 50% at 80% 90%,
+    rgba(249, 115, 22, 0.1) 0%,
+    transparent 80%
   );
 
   /* ---- Surfaces ---- */
@@ -51,62 +54,62 @@
   --surface-raised: var(--neutral-900);
   --surface-raised-2: var(--neutral-800);
   --surface-inset: var(--neutral-850);
-  --surface-overlay: rgba(5, 5, 7, 0.72);
+  --surface-overlay: rgba(3, 3, 4, 0.76);
 
   /* ---- Glass ---- */
-  --glass-subtle-fill: rgba(255, 255, 255, 0.03);
-  --glass-base-fill: rgba(255, 255, 255, 0.045);
-  --glass-strong-fill: rgba(255, 255, 255, 0.06);
-  --glass-subtle-border: rgba(255, 255, 255, 0.06);
-  --glass-base-border: rgba(255, 255, 255, 0.08);
-  --glass-strong-border: rgba(255, 255, 255, 0.1);
+  --glass-subtle-fill: rgba(255, 255, 255, 0.02);
+  --glass-base-fill: rgba(255, 255, 255, 0.035);
+  --glass-strong-fill: rgba(255, 255, 255, 0.05);
+  --glass-subtle-border: rgba(255, 255, 255, 0.04);
+  --glass-base-border: rgba(255, 255, 255, 0.06);
+  --glass-strong-border: rgba(255, 255, 255, 0.08);
 
   /* ---- Borders ---- */
-  --border-subtle: rgba(255, 255, 255, 0.08);
-  --border-muted: rgba(255, 255, 255, 0.12);
-  --border-strong: rgba(255, 255, 255, 0.16);
-  --border-primary: rgba(79, 125, 255, 0.4);
+  --border-subtle: rgba(255, 255, 255, 0.06);
+  --border-muted: rgba(255, 255, 255, 0.09);
+  --border-strong: rgba(255, 255, 255, 0.12);
+  --border-primary: rgba(6, 182, 212, 0.3);
 
   /* ---- Text ---- */
-  --text-primary: #f5f6f8;
-  --text-secondary: #a2a6b4;
-  --text-muted: #6b7080;
-  --text-disabled: #5a5f72;
-  --text-on-primary: #050507;
-  --text-link: #6b92ff;
+  --text-primary: #f0f2f8;
+  --text-secondary: #9398b0;
+  --text-muted: #626782;
+  --text-disabled: #50546c;
+  --text-on-primary: #030304;
+  --text-link: #22d3ee;
 
   /* ---- State ---- */
-  --success: #34d399;
-  --success-tint: rgba(52, 211, 153, 0.12);
-  --warning: #fbbf24;
-  --warning-tint: rgba(251, 191, 36, 0.12);
-  --error: #f87171;
-  --error-tint: rgba(248, 113, 113, 0.12);
-  --info: #60a5fa;
-  --info-tint: rgba(96, 165, 250, 0.12);
+  --success: #10b981;
+  --success-tint: rgba(16, 185, 129, 0.1);
+  --warning: #f59e0b;
+  --warning-tint: rgba(245, 158, 11, 0.1);
+  --error: #ef4444;
+  --error-tint: rgba(239, 68, 68, 0.1);
+  --info: #06b6d4;
+  --info-tint: rgba(6, 182, 212, 0.1);
   /* state borders + on-tint text (§1.9) */
-  --success-border: rgba(52, 211, 153, 0.32);
-  --success-fg: #6ee7b7;
-  --warning-border: rgba(251, 191, 36, 0.32);
-  --warning-fg: #fcd34d;
-  --error-border: rgba(248, 113, 113, 0.34);
-  --error-fg: #fca5a5;
-  --info-border: rgba(96, 165, 250, 0.32);
-  --info-fg: #93c5fd;
+  --success-border: rgba(16, 185, 129, 0.25);
+  --success-fg: #34d399;
+  --warning-border: rgba(245, 158, 11, 0.25);
+  --warning-fg: #fbbf24;
+  --error-border: rgba(239, 68, 68, 0.25);
+  --error-fg: #f87171;
+  --info-border: rgba(6, 182, 212, 0.25);
+  --info-fg: #22d3ee;
 
   /* ---- Radius (base for shadcn calc; explicit scale in @theme) ---- */
-  --radius: 0.875rem; /* 14px — md default */
+  --radius: 1rem;
 
   /* ---- Shadows / glow ---- */
-  --shadow-soft: 0 2px 8px rgba(0, 0, 0, 0.32);
-  --shadow-medium: 0 8px 24px rgba(0, 0, 0, 0.4);
-  --shadow-large: 0 24px 64px rgba(0, 0, 0, 0.5);
-  --shadow-xl: 0 40px 120px rgba(0, 0, 0, 0.55);
-  --shadow-glass: 0 8px 32px rgba(0, 0, 0, 0.36), inset 0 1px 0 rgba(255, 255, 255, 0.1);
-  --glow-primary: 0 0 40px rgba(79, 125, 255, 0.35);
-  --glow-violet: 0 0 40px rgba(124, 92, 255, 0.32);
-  --glow-cyan: 0 0 32px rgba(34, 211, 238, 0.3);
-  --glow-focus: 0 0 0 2px rgba(79, 125, 255, 0.6);
+  --shadow-soft: 0 2px 12px rgba(0, 0, 0, 0.4);
+  --shadow-medium: 0 8px 32px rgba(0, 0, 0, 0.5);
+  --shadow-large: 0 24px 72px rgba(0, 0, 0, 0.6);
+  --shadow-xl: 0 40px 140px rgba(0, 0, 0, 0.7);
+  --shadow-glass: 0 8px 32px rgba(0, 0, 0, 0.45), inset 0 1px 0 rgba(255, 255, 255, 0.05);
+  --glow-primary: 0 0 40px rgba(6, 182, 212, 0.3);
+  --glow-violet: 0 0 40px rgba(249, 115, 22, 0.25);
+  --glow-cyan: 0 0 32px rgba(6, 182, 212, 0.25);
+  --glow-focus: 0 0 0 2px rgba(6, 182, 212, 0.5);
 
   /* ---- Motion ---- */
   --dur-instant: 100ms;
@@ -165,8 +168,8 @@
      (self-host, see public/fonts/README.md); until then it falls back to Geist. */
   --font-sans: var(--font-geist-sans), ui-sans-serif, system-ui, -apple-system, sans-serif;
   --font-mono: var(--font-geist-mono), ui-monospace, monospace;
-  --font-display:
-    var(--font-display-face, var(--font-geist-sans)), ui-sans-serif, system-ui, sans-serif;
+  --font-display: var(--font-bebas), ui-sans-serif, system-ui, sans-serif;
+  --font-serif: var(--font-playfair), ui-serif, Georgia, serif;
 
   /* shadcn semantic colors */
   --color-background: var(--background);
@@ -240,15 +243,15 @@
   --ease-out-soft: var(--ease-out-soft);
 
   /* fluid type scale (§2.5) -> text-display-xl, text-heading-l, text-label, ... */
-  --text-display-xl: clamp(3.25rem, 2.2rem + 4.6vw, 7rem);
-  --text-display-xl--line-height: 1.05;
-  --text-display-xl--letter-spacing: -0.03em;
-  --text-display-l: clamp(2.5rem, 1.9rem + 2.9vw, 4.5rem);
-  --text-display-l--line-height: 1.08;
-  --text-display-l--letter-spacing: -0.02em;
-  --text-display-m: clamp(2rem, 1.6rem + 1.8vw, 3rem);
-  --text-display-m--line-height: 1.12;
-  --text-display-m--letter-spacing: -0.02em;
+  --text-display-xl: clamp(4rem, 2.5rem + 7vw, 10rem);
+  --text-display-xl--line-height: 0.9;
+  --text-display-xl--letter-spacing: 0.01em;
+  --text-display-l: clamp(2.75rem, 2rem + 4vw, 5.5rem);
+  --text-display-l--line-height: 0.95;
+  --text-display-l--letter-spacing: 0.01em;
+  --text-display-m: clamp(2rem, 1.5rem + 2.5vw, 3.75rem);
+  --text-display-m--line-height: 1.0;
+  --text-display-m--letter-spacing: 0.01em;
   --text-heading-l: clamp(1.5rem, 1.3rem + 0.9vw, 2.25rem);
   --text-heading-l--line-height: 1.2;
   --text-heading-l--letter-spacing: -0.015em;
@@ -352,6 +355,34 @@
     background-clip: text;
     color: transparent;
   }
+
+  .italic-accent {
+    font-family: var(--font-serif);
+    font-style: italic;
+    font-weight: 400;
+    text-transform: lowercase;
+    letter-spacing: 0.02em;
+    color: var(--brand-violet);
+  }
+
+  .glow-cyan {
+    box-shadow: 0 0 24px rgba(6, 182, 212, 0.15);
+    border-color: rgba(6, 182, 212, 0.3) !important;
+  }
+
+  .glow-orange {
+    box-shadow: 0 0 24px rgba(249, 115, 22, 0.15);
+    border-color: rgba(249, 115, 22, 0.25) !important;
+  }
+
+  .rotate-infinite {
+    animation: rotate-badge 12s linear infinite;
+  }
+}
+
+@keyframes rotate-badge {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
 }
 
 /* =============================================================================

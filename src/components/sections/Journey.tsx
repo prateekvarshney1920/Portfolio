@@ -6,7 +6,7 @@ import {
   Smartphone, Layers, Flame, Palette, Users, Workflow, Brain, Bot,
 } from 'lucide-react';
 import type { LucideIcon } from 'lucide-react';
-import { Section, SectionHeading, GlassCard, GradientText } from '@/components/primitives';
+import { Section, SectionHeading, GlassCard } from '@/components/primitives';
 import { AnimatedSection } from '@/components/ui/AnimatedSection';
 import { journeyMilestones } from '@/content/data';
 import { DURATION, EASING } from '@/config/motion';
@@ -15,8 +15,8 @@ import { useReducedMotion } from '@/hooks/use-reduced-motion';
 /**
  * Journey
  * ---------------------------------------------------------------------------
- * Interactive vertical timeline showing the career progression with animated
- * connector line and glass milestone cards.
+ * Rebuilt to match the Dribbble timeline look: vertical connector line,
+ * large watermark outlines, and alternating glow cards.
  */
 
 const iconMap: Record<string, LucideIcon> = {
@@ -30,23 +30,32 @@ export function Journey() {
 
   return (
     <Section id="journey" className="overflow-hidden">
-      <AnimatedSection>
+      <AnimatedSection className="relative z-10">
         <SectionHeading
           align="center"
-          eyebrow="My Journey"
+          eyebrow="Chronology"
           title={
             <>
-              The path to{' '}
-              <GradientText>building AI</GradientText>
+              from mobile roots to{' '}
+              <span className="italic-accent font-serif italic text-brand-violet block mt-1">
+                autonomous agents
+              </span>
             </>
           }
-          description="Every step was a building block — from mobile apps to intelligent agents."
+          description="A chronological timeline of my professional growth and skill acquisition."
         />
       </AnimatedSection>
 
-      {/* Timeline */}
-      <div ref={timelineRef} className="relative mt-16 md:mt-20">
-        {/* Vertical Line */}
+      {/* Timeline Wrapper */}
+      <div ref={timelineRef} className="relative mt-16 md:mt-24 z-10">
+        {/* Large Backdrop Watermark Text */}
+        <div className="absolute inset-0 flex items-center justify-center select-none pointer-events-none z-0 overflow-hidden opacity-5">
+          <span className="font-display text-[22vw] leading-none text-fg uppercase tracking-widest">
+            HISTORY
+          </span>
+        </div>
+
+        {/* Vertical Center Line */}
         <div className="absolute top-0 left-4 h-full w-px md:left-1/2 md:-translate-x-px" aria-hidden="true">
           <motion.div
             className="h-full w-full origin-top"
@@ -61,8 +70,8 @@ export function Journey() {
           />
         </div>
 
-        {/* Milestones */}
-        <div className="space-y-8 md:space-y-12">
+        {/* Milestones list */}
+        <div className="relative z-10 space-y-8 md:space-y-16">
           {journeyMilestones.map((milestone, i) => {
             const Icon = iconMap[milestone.icon] ?? Brain;
             const isLeft = i % 2 === 0;
@@ -89,24 +98,35 @@ export function Journey() {
                   isLeft ? 'md:flex-row' : 'md:flex-row-reverse'
                 }`}
               >
-                {/* Dot */}
+                {/* Connector Dot */}
                 <div
-                  className="absolute left-2.5 top-2 z-10 size-3 rounded-full border-2 border-[var(--brand-blue)] bg-[var(--surface-base)] md:left-1/2 md:-translate-x-1/2"
+                  className="absolute left-2.5 top-3.5 z-10 size-4 rounded-full border-2 border-[var(--brand-blue)] bg-[var(--surface-base)] md:left-1/2 md:-translate-x-1/2 transition-colors duration-300 group-hover:bg-primary"
+                  style={{
+                    boxShadow: isLeft
+                      ? '0 0 10px rgba(6, 182, 212, 0.6)'
+                      : '0 0 10px rgba(249, 115, 22, 0.6)',
+                  }}
                   aria-hidden="true"
                 />
 
-                {/* Card */}
-                <div className={`md:w-[calc(50%-2rem)] ${isLeft ? 'md:pr-0 md:text-right' : 'md:pl-0 md:text-left'}`}>
-                  <GlassCard padding="md" interactive className="group">
+                {/* Milestone Card */}
+                <div className={`md:w-[calc(50%-2.5rem)] ${isLeft ? 'md:pr-0 md:text-right' : 'md:pl-0 md:text-left'}`}>
+                  <GlassCard
+                    padding="md"
+                    interactive
+                    className={`group border-[var(--border-muted)] ${
+                      isLeft ? 'glow-cyan' : 'glow-orange'
+                    }`}
+                  >
                     <div className={`flex items-start gap-4 ${isLeft ? 'md:flex-row-reverse' : ''}`}>
-                      <div className="inline-flex size-10 shrink-0 items-center justify-center rounded-lg bg-primary/10 transition-colors duration-200 group-hover:bg-primary/20">
-                        <Icon className="size-5 text-primary" />
+                      <div className="inline-flex size-10 shrink-0 items-center justify-center rounded-lg bg-[var(--glass-subtle-fill)] border border-[var(--glass-subtle-border)] transition-colors duration-200 group-hover:bg-primary/10">
+                        <Icon className="size-5 text-fg-secondary transition-colors duration-200 group-hover:text-primary" />
                       </div>
                       <div className="min-w-0 flex-1">
-                        <span className="text-fg-muted text-caption mb-1 block font-mono">
+                        <span className="text-brand-violet text-caption mb-1 block font-mono font-semibold">
                           {milestone.year}
                         </span>
-                        <h3 className="text-fg text-heading-m mb-2 font-display font-semibold">
+                        <h3 className="text-fg text-heading-m mb-2 font-display font-semibold uppercase tracking-wider">
                           {milestone.title}
                         </h3>
                         <p className="text-fg-secondary text-body-s leading-relaxed">
@@ -117,8 +137,8 @@ export function Journey() {
                   </GlassCard>
                 </div>
 
-                {/* Spacer for the other side */}
-                <div className="hidden md:block md:w-[calc(50%-2rem)]" />
+                {/* Spacer */}
+                <div className="hidden md:block md:w-[calc(50%-2.5rem)]" />
               </motion.div>
             );
           })}

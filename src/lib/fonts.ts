@@ -1,20 +1,29 @@
 import { GeistSans } from 'geist/font/sans';
 import { GeistMono } from 'geist/font/mono';
+import { Bebas_Neue, Playfair_Display } from 'next/font/google';
 
 /**
  * Font foundation.
- *
- * Body / UI  -> Geist Sans   (self-hosted by the `geist` package, no network fetch)
- * Mono       -> Geist Mono   (self-hosted)
- * Display    -> Clash Display (design-system target, self-hosted via next/font/local)
- *
- * The display face is not yet bundled (the .woff2 files must be added — see
- * public/fonts/README.md). Until then `--font-display` falls back to Geist Sans
- * via the CSS mapping in globals.css, so the app builds and runs immediately.
- * Activating Clash Display is a 3-line change documented in that README.
+ * 
+ * Sans       -> Geist Sans (body/UI)
+ * Mono       -> Geist Mono (labels/mono text)
+ * Display    -> Bebas Neue (tall, impactful headings)
+ * Serif      -> Playfair Display (sophisticated keyword accents)
  */
 export const fontSans = GeistSans;
 export const fontMono = GeistMono;
 
-/** Space-separated `next/font` variable classes applied to <html>. */
-export const fontVariables = `${GeistSans.variable} ${GeistMono.variable}`;
+export const fontBebas = Bebas_Neue({
+  weight: '400',
+  subsets: ['latin'],
+  variable: '--font-bebas',
+});
+
+export const fontPlayfair = Playfair_Display({
+  subsets: ['latin'],
+  style: ['normal', 'italic'],
+  variable: '--font-playfair',
+});
+
+/** Space-separated font variable classes applied to <html>. */
+export const fontVariables = `${GeistSans.variable} ${GeistMono.variable} ${fontBebas.variable} ${fontPlayfair.variable}`;

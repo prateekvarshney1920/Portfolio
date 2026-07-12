@@ -1,19 +1,20 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import { motion, AnimatePresence } from 'motion/react';
-import { ArrowDown, ArrowRight } from 'lucide-react';
-
+import Image from 'next/image';
+import { motion } from 'motion/react';
+import { ArrowDown, ArrowRight, Sparkles } from 'lucide-react';
 import { personalInfo } from '@/content/data';
-import { GradientText, Button, Container } from '@/components/primitives';
+import { Button, Container } from '@/components/primitives';
 import { DURATION, EASING } from '@/config/motion';
 import { useReducedMotion } from '@/hooks/use-reduced-motion';
 
 /**
  * Hero
  * ---------------------------------------------------------------------------
- * Full-viewport hero with aurora gradient background, animated role rotation,
- * shimmering gradient title, CTA buttons, and a scroll indicator.
+ * Rebuilt to match the premium Dribbble reference shot ("From Idea to Impact").
+ * Features Bebas Neue display typography, classic serif italic elements,
+ * an arched portrait with dual cyan/orange neon glows, and a spinning circular text badge.
  */
 export function Hero() {
   const prefersReducedMotion = useReducedMotion();
@@ -35,99 +36,132 @@ export function Hero() {
   return (
     <section
       id="hero"
-      className="relative flex min-h-dvh flex-col items-center justify-center overflow-hidden"
+      className="relative flex min-h-dvh flex-col items-center justify-center overflow-hidden pt-24 pb-16 md:pt-32"
       aria-label="Hero"
     >
-      {/* Aurora Background */}
-      <div
-        className="pointer-events-none absolute inset-0"
-        style={{ backgroundImage: 'var(--gradient-aurora)' }}
-        aria-hidden="true"
-      />
-
-      {/* Floating orbs */}
+      {/* Dual Neon Ambient Glows */}
       <div className="pointer-events-none absolute inset-0 overflow-hidden" aria-hidden="true">
-        <motion.div
-          className="absolute -top-32 -left-32 size-96 rounded-full opacity-20 blur-[100px]"
+        {/* Left Electric Cyan Glow */}
+        <div
+          className="absolute -top-40 -left-40 size-[500px] rounded-full opacity-20 blur-[120px]"
           style={{ background: 'var(--brand-blue)' }}
-          animate={{ x: [0, 60, 0], y: [0, 40, 0] }}
-          transition={{ duration: 20, repeat: Infinity, ease: 'linear' }}
         />
-        <motion.div
-          className="absolute -right-32 -bottom-32 size-96 rounded-full opacity-15 blur-[100px]"
+        {/* Right Red-Orange Glow */}
+        <div
+          className="absolute -right-40 bottom-10 size-[500px] rounded-full opacity-15 blur-[120px]"
           style={{ background: 'var(--brand-violet)' }}
-          animate={{ x: [0, -40, 0], y: [0, -60, 0] }}
-          transition={{ duration: 25, repeat: Infinity, ease: 'linear' }}
-        />
-        <motion.div
-          className="absolute top-1/3 left-1/2 size-64 -translate-x-1/2 rounded-full opacity-10 blur-[80px]"
-          style={{ background: 'var(--brand-cyan)' }}
-          animate={{ scale: [1, 1.2, 1], opacity: [0.1, 0.18, 0.1] }}
-          transition={{ duration: 15, repeat: Infinity, ease: 'linear' }}
         />
       </div>
 
       <Container className="relative z-[1] flex flex-col items-center text-center">
-        {/* Eyebrow */}
+        {/* Eyebrow Label */}
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 15 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: DURATION.slow, ease: EASING.outSoft, delay: 0.2 }}
+          transition={{ duration: DURATION.slow, ease: EASING.outSoft, delay: 0.1 }}
+          className="mb-6"
         >
-          <span className="text-fg-muted mb-6 inline-flex items-center gap-2 font-mono text-xs tracking-[0.2em] uppercase md:mb-8 md:text-sm">
-            <span className="bg-success inline-block size-2 rounded-full" />
-            Available for opportunities
+          <span className="glass inline-flex items-center gap-2 rounded-full border border-[var(--glass-base-border)] px-4 py-1.5 font-mono text-[10px] tracking-[0.25em] uppercase text-fg-secondary">
+            <span className="bg-success inline-block size-1.5 rounded-full animate-pulse" />
+            available for projects
           </span>
         </motion.div>
 
-        {/* Name */}
-        <motion.h1
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: DURATION.slow, ease: EASING.outSoft, delay: 0.35 }}
-          className="font-display text-display-xl mb-4 font-bold tracking-tight md:mb-6"
-        >
-          <GradientText animate="shimmer">
-            {personalInfo.name}
-          </GradientText>
-        </motion.h1>
+        {/* Display Typography: "FROM IDEA TO impact" */}
+        <div className="relative mb-8 select-none">
+          <motion.h1
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: DURATION.slow, ease: EASING.outSoft, delay: 0.2 }}
+            className="font-display text-[12vw] leading-[0.85] uppercase text-fg md:text-[8vw] lg:text-[7.5vw] tracking-tighter"
+          >
+            FROM IDEA TO
+          </motion.h1>
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: DURATION.slow, ease: EASING.outSoft, delay: 0.3 }}
+            className="mt-2 text-center"
+          >
+            <span className="italic-accent text-[11vw] font-serif font-normal italic lowercase leading-none tracking-wide text-brand-violet md:text-[7.5vw] lg:text-[7vw]">
+              impact
+            </span>
+          </motion.div>
+        </div>
 
-        {/* Animated Role Rotation */}
+        {/* Sub-headline / Roles */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: DURATION.slow, ease: EASING.outSoft, delay: 0.5 }}
-          className="mb-6 h-10 md:mb-8 md:h-12"
+          transition={{ duration: DURATION.slow, ease: EASING.outSoft, delay: 0.4 }}
+          className="mb-8 max-w-xl"
         >
-          <AnimatePresence mode="wait">
-            <motion.span
-              key={roleIndex}
-              initial={{ opacity: 0, y: 10 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -10 }}
-              transition={{ duration: DURATION.base, ease: EASING.standard }}
-              className="text-fg-secondary block text-xl font-medium md:text-2xl lg:text-3xl"
-            >
+          <p className="font-mono text-xs uppercase tracking-widest text-fg-secondary">
+            {personalInfo.name} — &nbsp;
+            <span className="text-brand-blue font-semibold">
               {personalInfo.roles[roleIndex]}
-            </motion.span>
-          </AnimatePresence>
+            </span>
+          </p>
+          <p className="text-fg-muted mt-3 text-body-s leading-relaxed md:text-body-m">
+            {personalInfo.tagline}
+          </p>
         </motion.div>
 
-        {/* Tagline */}
-        <motion.p
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: DURATION.slow, ease: EASING.outSoft, delay: 0.65 }}
-          className="text-fg-secondary text-body-l mb-10 max-w-xl leading-relaxed md:mb-12"
-        >
-          {personalInfo.tagline}
-        </motion.p>
-
-        {/* CTAs */}
+        {/* Styled Portrait & Badges Container */}
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, scale: 0.95 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: DURATION.slow, ease: EASING.outSoft, delay: 0.5 }}
+          className="relative mb-10"
+        >
+          {/* Portrait Image Frame */}
+          <div className="relative z-10 overflow-hidden rounded-t-[100px] rounded-b-[20px] border border-[var(--border-muted)] bg-neutral-900 p-2 shadow-xl">
+            {/* Dual Glow Borders */}
+            <div className="absolute inset-0 z-20 rounded-t-[100px] rounded-b-[20px] pointer-events-none border border-transparent shadow-[inset_0_0_12px_rgba(255,255,255,0.05)]" />
+            <div className="absolute top-0 bottom-0 left-0 w-1/2 z-20 rounded-tl-[100px] rounded-bl-[20px] pointer-events-none border-l-2 border-t-2 border-[rgba(6,182,212,0.6)] shadow-[inset_12px_12px_12px_-12px_rgba(6,182,212,0.2)]" />
+            <div className="absolute top-0 bottom-0 right-0 w-1/2 z-20 rounded-tr-[100px] rounded-br-[20px] pointer-events-none border-r-2 border-b-2 border-[rgba(249,115,22,0.5)] shadow-[inset_-12px_-12px_12px_-12px_rgba(249,115,22,0.2)]" />
+
+            <div className="relative size-56 overflow-hidden rounded-t-[100px] rounded-b-[16px] md:size-64">
+              <Image
+                src="/images/portrait.png"
+                alt="Prateek Varshney portrait"
+                fill
+                priority
+                className="object-cover object-center grayscale hover:grayscale-0 transition-all duration-700"
+                sizes="(max-w-768px) 224px, 256px"
+              />
+            </div>
+          </div>
+
+          {/* Left Floating Spinning Text Badge */}
+          <div className="absolute -left-16 bottom-6 z-20 hidden md:block">
+            <div className="glass flex size-24 items-center justify-center rounded-full border border-[var(--glass-base-border)] shadow-lg glow-cyan">
+              <svg viewBox="0 0 100 100" className="size-20 rotate-infinite select-none">
+                <path id="circlePath" d="M 50, 50 m -35, 0 a 35,35 0 1,1 70,0 a 35,35 0 1,1 -70,0" fill="none" />
+                <text className="fill-fg font-mono text-[7px] uppercase tracking-[0.16em] font-medium">
+                  <textPath href="#circlePath" startOffset="0%">
+                    AI AGENT BUILDER • AUTOMATION SPECIALIST •
+                  </textPath>
+                </text>
+              </svg>
+              <Sparkles className="absolute size-4 text-brand-blue" />
+            </div>
+          </div>
+
+          {/* Right Floating Metric Card */}
+          <div className="absolute -right-16 top-10 z-20 hidden md:block">
+            <div className="glass rounded-xl border border-[var(--glass-base-border)] p-3 shadow-lg glow-orange flex flex-col items-center">
+              <span className="font-display text-2xl text-brand-violet font-bold leading-none">9+</span>
+              <span className="font-mono text-[9px] text-fg-muted uppercase tracking-wider mt-1">projects live</span>
+            </div>
+          </div>
+        </motion.div>
+
+        {/* Action CTAs */}
+        <motion.div
+          initial={{ opacity: 0, y: 15 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: DURATION.slow, ease: EASING.outSoft, delay: 0.8 }}
+          transition={{ duration: DURATION.slow, ease: EASING.outSoft, delay: 0.6 }}
           className="flex flex-col items-center gap-4 sm:flex-row"
         >
           <Button
@@ -147,24 +181,22 @@ export function Hero() {
         </motion.div>
       </Container>
 
-      {/* Scroll Indicator */}
+      {/* Scroll Down */}
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
-        transition={{ delay: 1.5, duration: DURATION.slow }}
-        className="absolute bottom-8 left-1/2 -translate-x-1/2"
+        transition={{ delay: 1.2, duration: DURATION.slow }}
+        className="absolute bottom-6 left-1/2 -translate-x-1/2 hidden md:block"
       >
-        <motion.button
+        <button
           type="button"
           onClick={() => handleScroll('#about')}
-          animate={{ y: [0, 8, 0] }}
-          transition={{ duration: 2, repeat: Infinity, ease: 'easeInOut' }}
-          className="text-fg-muted hover:text-fg flex flex-col items-center gap-2 transition-colors"
+          className="text-fg-muted hover:text-fg flex flex-col items-center gap-1.5 transition-colors font-mono text-[10px] uppercase tracking-[0.2em]"
           aria-label="Scroll to content"
         >
-          <span className="text-caption font-mono uppercase tracking-widest">Scroll</span>
-          <ArrowDown className="size-4" />
-        </motion.button>
+          Scroll Down
+          <ArrowDown className="size-3.5 animate-bounce" />
+        </button>
       </motion.div>
     </section>
   );
