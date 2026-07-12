@@ -1,0 +1,384 @@
+@import 'tailwindcss';
+@import 'tw-animate-css';
+
+/* Dark-only project: the `dark` class is always present on <html>. */
+@custom-variant dark (&:is(.dark *));
+
+/* =============================================================================
+   AURORA DESIGN TOKENS  —  single source of truth (see 01_DESIGN_SYSTEM.md)
+   All raw values live here as CSS custom properties. The @theme inline block
+   further down maps the semantic ones into Tailwind utility classes.
+   ============================================================================= */
+:root {
+  /* ---- Neutral ramp ---- */
+  --neutral-950: #050507;
+  --neutral-900: #0b0b12;
+  --neutral-850: #0f1018;
+  --neutral-800: #14151f;
+  --neutral-700: #1c1e2a;
+  --neutral-600: #2a2d3d;
+  --neutral-500: #3d4152;
+  --neutral-400: #5a5f72;
+  --neutral-300: #6b7080;
+  --neutral-200: #a2a6b4;
+  --neutral-100: #c9ccd6;
+  --neutral-50: #f5f6f8;
+
+  /* ---- Brand / accent ---- */
+  --brand-blue: #4f7dff;
+  --brand-blue-hover: #6b92ff;
+  --brand-blue-active: #3b6ae8;
+  --brand-violet: #7c5cff;
+  --brand-violet-hover: #9a80ff;
+  --brand-cyan: #22d3ee;
+
+  /* ---- Gradients ---- */
+  --gradient-signature: linear-gradient(120deg, #4f7dff 0%, #7c5cff 100%);
+  --gradient-signature-soft: linear-gradient(
+    120deg,
+    rgba(79, 125, 255, 0.16) 0%,
+    rgba(124, 92, 255, 0.16) 100%
+  );
+  --gradient-aurora: radial-gradient(
+    60% 60% at 50% 0%,
+    rgba(79, 125, 255, 0.18) 0%,
+    rgba(124, 92, 255, 0.1) 45%,
+    transparent 75%
+  );
+
+  /* ---- Surfaces ---- */
+  --surface-base: var(--neutral-950);
+  --surface-raised: var(--neutral-900);
+  --surface-raised-2: var(--neutral-800);
+  --surface-inset: var(--neutral-850);
+  --surface-overlay: rgba(5, 5, 7, 0.72);
+
+  /* ---- Glass ---- */
+  --glass-subtle-fill: rgba(255, 255, 255, 0.03);
+  --glass-base-fill: rgba(255, 255, 255, 0.045);
+  --glass-strong-fill: rgba(255, 255, 255, 0.06);
+  --glass-subtle-border: rgba(255, 255, 255, 0.06);
+  --glass-base-border: rgba(255, 255, 255, 0.08);
+  --glass-strong-border: rgba(255, 255, 255, 0.1);
+
+  /* ---- Borders ---- */
+  --border-subtle: rgba(255, 255, 255, 0.08);
+  --border-muted: rgba(255, 255, 255, 0.12);
+  --border-strong: rgba(255, 255, 255, 0.16);
+  --border-primary: rgba(79, 125, 255, 0.4);
+
+  /* ---- Text ---- */
+  --text-primary: #f5f6f8;
+  --text-secondary: #a2a6b4;
+  --text-muted: #6b7080;
+  --text-disabled: #5a5f72;
+  --text-on-primary: #050507;
+  --text-link: #6b92ff;
+
+  /* ---- State ---- */
+  --success: #34d399;
+  --success-tint: rgba(52, 211, 153, 0.12);
+  --warning: #fbbf24;
+  --warning-tint: rgba(251, 191, 36, 0.12);
+  --error: #f87171;
+  --error-tint: rgba(248, 113, 113, 0.12);
+  --info: #60a5fa;
+  --info-tint: rgba(96, 165, 250, 0.12);
+  /* state borders + on-tint text (§1.9) */
+  --success-border: rgba(52, 211, 153, 0.32);
+  --success-fg: #6ee7b7;
+  --warning-border: rgba(251, 191, 36, 0.32);
+  --warning-fg: #fcd34d;
+  --error-border: rgba(248, 113, 113, 0.34);
+  --error-fg: #fca5a5;
+  --info-border: rgba(96, 165, 250, 0.32);
+  --info-fg: #93c5fd;
+
+  /* ---- Radius (base for shadcn calc; explicit scale in @theme) ---- */
+  --radius: 0.875rem; /* 14px — md default */
+
+  /* ---- Shadows / glow ---- */
+  --shadow-soft: 0 2px 8px rgba(0, 0, 0, 0.32);
+  --shadow-medium: 0 8px 24px rgba(0, 0, 0, 0.4);
+  --shadow-large: 0 24px 64px rgba(0, 0, 0, 0.5);
+  --shadow-xl: 0 40px 120px rgba(0, 0, 0, 0.55);
+  --shadow-glass: 0 8px 32px rgba(0, 0, 0, 0.36), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  --glow-primary: 0 0 40px rgba(79, 125, 255, 0.35);
+  --glow-violet: 0 0 40px rgba(124, 92, 255, 0.32);
+  --glow-cyan: 0 0 32px rgba(34, 211, 238, 0.3);
+  --glow-focus: 0 0 0 2px rgba(79, 125, 255, 0.6);
+
+  /* ---- Motion ---- */
+  --dur-instant: 100ms;
+  --dur-fast: 150ms;
+  --dur-base: 300ms;
+  --dur-slow: 600ms;
+  --dur-cinematic: 900ms;
+  --ease-standard: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+  --ease-out-soft: cubic-bezier(0.16, 1, 0.3, 1);
+
+  /* ---- Z-index scale ---- */
+  --z-base: 0;
+  --z-raised: 10;
+  --z-sticky: 100;
+  --z-nav: 200;
+  --z-overlay: 300;
+  --z-modal: 400;
+  --z-cursor: 900;
+
+  /* ===========================================================================
+     shadcn/ui semantic tokens — VALUED from Aurora above so there is one source
+     of truth. shadcn components consume these; Aurora drives them.
+     =========================================================================== */
+  --background: var(--neutral-950);
+  --foreground: var(--neutral-50);
+  --card: var(--neutral-900);
+  --card-foreground: var(--neutral-50);
+  --popover: var(--neutral-850);
+  --popover-foreground: var(--neutral-50);
+  --primary: var(--brand-blue);
+  --primary-foreground: var(--neutral-950);
+  --secondary: var(--neutral-800);
+  --secondary-foreground: var(--neutral-50);
+  --muted: var(--neutral-800);
+  --muted-foreground: var(--neutral-200);
+  --accent: var(--neutral-800);
+  --accent-foreground: var(--neutral-50);
+  --destructive: var(--error);
+  --destructive-foreground: var(--neutral-50);
+  --border: var(--border-subtle);
+  --input: var(--border-subtle);
+  --ring: var(--brand-blue);
+}
+
+.dark {
+  color-scheme: dark;
+}
+
+/* =============================================================================
+   TAILWIND v4 THEME MAPPING (@theme inline)
+   Generates utility classes from the variables above WITHOUT re-emitting them.
+   ============================================================================= */
+@theme inline {
+  /* fonts — Geist (self-hosted via `geist` pkg). Display target is Clash Display
+     (self-host, see public/fonts/README.md); until then it falls back to Geist. */
+  --font-sans: var(--font-geist-sans), ui-sans-serif, system-ui, -apple-system, sans-serif;
+  --font-mono: var(--font-geist-mono), ui-monospace, monospace;
+  --font-display:
+    var(--font-display-face, var(--font-geist-sans)), ui-sans-serif, system-ui, sans-serif;
+
+  /* shadcn semantic colors */
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+
+  /* Aurora extended surfaces + foreground text tokens */
+  --color-surface: var(--surface-base);
+  --color-surface-raised: var(--surface-raised);
+  --color-surface-raised-2: var(--surface-raised-2);
+  --color-surface-inset: var(--surface-inset);
+  --color-fg: var(--text-primary);
+  --color-fg-secondary: var(--text-secondary);
+  --color-fg-muted: var(--text-muted);
+  --color-fg-disabled: var(--text-disabled);
+
+  /* Aurora brand + state colors (e.g. text-brand-violet, bg-success) */
+  --color-brand-blue: var(--brand-blue);
+  --color-brand-violet: var(--brand-violet);
+  --color-brand-cyan: var(--brand-cyan);
+  --color-success: var(--success);
+  --color-warning: var(--warning);
+  --color-error: var(--error);
+  --color-info: var(--info);
+  /* state tint fills, borders, on-tint text -> bg-success-tint, border-success-border, text-success-fg */
+  --color-success-tint: var(--success-tint);
+  --color-success-border: var(--success-border);
+  --color-success-fg: var(--success-fg);
+  --color-warning-tint: var(--warning-tint);
+  --color-warning-border: var(--warning-border);
+  --color-warning-fg: var(--warning-fg);
+  --color-error-tint: var(--error-tint);
+  --color-error-border: var(--error-border);
+  --color-error-fg: var(--error-fg);
+  --color-info-tint: var(--info-tint);
+  --color-info-border: var(--info-border);
+  --color-info-fg: var(--info-fg);
+
+  /* container widths (§3.4) -> max-w-page, max-w-wide, max-w-content, max-w-reading */
+  --container-page: 75rem; /* 1200px */
+  --container-wide: 90rem; /* 1440px */
+  --container-content: 50rem; /* 800px */
+  --container-reading: 42.5rem; /* 680px */
+
+  /* radius scale */
+  --radius-sm: 0.5rem;
+  --radius-md: 0.875rem;
+  --radius-lg: 1.25rem;
+  --radius-xl: 1.75rem;
+  --radius-2xl: 2.25rem;
+
+  /* easing tokens (ease-standard, ease-in-out, ease-out-soft) */
+  --ease-standard: var(--ease-standard);
+  --ease-in-out: var(--ease-in-out);
+  --ease-out-soft: var(--ease-out-soft);
+
+  /* fluid type scale (§2.5) -> text-display-xl, text-heading-l, text-label, ... */
+  --text-display-xl: clamp(3.25rem, 2.2rem + 4.6vw, 7rem);
+  --text-display-xl--line-height: 1.05;
+  --text-display-xl--letter-spacing: -0.03em;
+  --text-display-l: clamp(2.5rem, 1.9rem + 2.9vw, 4.5rem);
+  --text-display-l--line-height: 1.08;
+  --text-display-l--letter-spacing: -0.02em;
+  --text-display-m: clamp(2rem, 1.6rem + 1.8vw, 3rem);
+  --text-display-m--line-height: 1.12;
+  --text-display-m--letter-spacing: -0.02em;
+  --text-heading-l: clamp(1.5rem, 1.3rem + 0.9vw, 2.25rem);
+  --text-heading-l--line-height: 1.2;
+  --text-heading-l--letter-spacing: -0.015em;
+  --text-heading-m: clamp(1.25rem, 1.15rem + 0.5vw, 1.5rem);
+  --text-heading-m--line-height: 1.25;
+  --text-heading-m--letter-spacing: -0.01em;
+  --text-body-l: clamp(1.0625rem, 1rem + 0.25vw, 1.25rem);
+  --text-body-l--line-height: 1.6;
+  --text-body-m: 1rem;
+  --text-body-m--line-height: 1.6;
+  --text-body-s: 0.9375rem;
+  --text-body-s--line-height: 1.55;
+  --text-label: 0.8125rem;
+  --text-label--line-height: 1.4;
+  --text-label--letter-spacing: 0.08em;
+  --text-caption: 0.75rem;
+  --text-caption--line-height: 1.4;
+  --text-caption--letter-spacing: 0.01em;
+}
+
+/* =============================================================================
+   BASE LAYER
+   ============================================================================= */
+@layer base {
+  * {
+    border-color: var(--border);
+  }
+
+  html {
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  body {
+    background-color: var(--background);
+    color: var(--foreground);
+    font-feature-settings:
+      'liga' 1,
+      'calt' 1;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  ::selection {
+    background-color: rgba(79, 125, 255, 0.28);
+    color: #f5f6f8;
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--ring);
+    outline-offset: 2px;
+    border-radius: 2px;
+  }
+
+  /* Subtle custom scrollbar */
+  * {
+    scrollbar-width: thin;
+    scrollbar-color: var(--neutral-700) transparent;
+  }
+  *::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+  }
+  *::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  *::-webkit-scrollbar-thumb {
+    background-color: var(--neutral-700);
+    border-radius: 9999px;
+    border: 2px solid transparent;
+    background-clip: content-box;
+  }
+  *::-webkit-scrollbar-thumb:hover {
+    background-color: var(--neutral-600);
+  }
+}
+
+/* =============================================================================
+   FOUNDATIONAL CSS UTILITIES (reusable classes, not React components)
+   ============================================================================= */
+@layer components {
+  .glass {
+    background-color: var(--glass-base-fill);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid var(--glass-base-border);
+    box-shadow: var(--shadow-glass);
+  }
+
+  .glass-strong {
+    background-color: var(--glass-strong-fill);
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
+    border: 1px solid var(--glass-strong-border);
+    box-shadow: var(--shadow-glass);
+  }
+
+  .text-gradient {
+    background-image: var(--gradient-signature);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+}
+
+/* =============================================================================
+   GLOBAL REDUCED-MOTION SAFETY NET (a11y — Design System §11.4 / §12.5)
+   Individual components still branch on the useReducedMotion hook; this is the
+   belt-and-braces fallback for any CSS-driven motion.
+   ============================================================================= */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* =============================================================================
+   KEYFRAMES (used by GradientText shimmer and future primitives)
+   ============================================================================= */
+@keyframes aurora-gradient-shift {
+  0%,
+  100% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+}
