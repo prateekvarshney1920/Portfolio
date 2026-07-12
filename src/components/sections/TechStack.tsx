@@ -2,11 +2,15 @@
 
 import React, { useState, useRef, MouseEvent } from 'react';
 import { motion, useMotionValue, useTransform, useSpring, useInView } from 'motion/react';
-import { FileCode } from 'lucide-react';
+import {
+  FileCode, Component, Globe, Paintbrush, Smartphone, Server,
+  Flame, Database, Workflow, Brain, Container as ContainerIcon,
+  GitBranch, Triangle, Figma,
+} from 'lucide-react';
+import type { LucideIcon } from 'lucide-react';
 import { Section, SectionHeading, GradientText } from '@/components/primitives';
 import { AnimatedSection } from '@/components/ui/AnimatedSection';
 import { techStack, type TechItem } from '@/content/data';
-import { brandLogosMap } from '@/components/icons/BrandLogos';
 import { useReducedMotion } from '@/hooks/use-reduced-motion';
 
 // Premium brand categories accent colors
@@ -20,6 +24,27 @@ const categoryColors: Record<string, string> = {
   AI: '#10a37f',           // OpenAI Emerald
   DevOps: '#2563eb',       // Indigo
   Design: '#ec4899',       // Pink/Figma Red
+};
+
+// Lucide icon mapping for clean, crisp vector rendering
+const iconMap: Record<string, LucideIcon> = {
+  TypeScript: FileCode,
+  Python: FileCode,
+  Kotlin: FileCode,
+  React: Component,
+  'Next.js': Globe,
+  'Tailwind CSS': Paintbrush,
+  'Jetpack Compose': Smartphone,
+  'Node.js': Server,
+  Firebase: Flame,
+  Supabase: Database,
+  PostgreSQL: Database,
+  n8n: Workflow,
+  OpenAI: Brain,
+  Docker: ContainerIcon,
+  Git: GitBranch,
+  Vercel: Triangle,
+  Figma: Figma,
 };
 
 export function TechStack() {
@@ -111,8 +136,8 @@ function TechCard({ tech, index, isInView }: { tech: TechItem; index: number; is
     mouseY.set(0);
   };
 
-  // Retrieve matching official SVG logo component
-  const LogoComponent = brandLogosMap[tech.name];
+  // Retrieve matching clean vector icon component
+  const IconComponent = iconMap[tech.name] ?? FileCode;
   const accentColor = categoryColors[tech.category] ?? '#06b6d4';
 
   return (
@@ -171,17 +196,10 @@ function TechCard({ tech, index, isInView }: { tech: TechItem; index: number; is
             : 'none',
         }}
       >
-        {LogoComponent ? (
-          <LogoComponent
-            className="transition-colors duration-300 text-fg-muted group-hover:text-fg h-11 w-11 md:h-12 md:w-12 lg:h-14 lg:w-14"
-            size={56}
-          />
-        ) : (
-          <FileCode
-            className="transition-colors duration-300 text-fg-muted group-hover:text-fg h-11 w-11 md:h-12 md:w-12 lg:h-14 lg:w-14"
-            style={{ color: isHovered ? accentColor : undefined }}
-          />
-        )}
+        <IconComponent
+          className="transition-colors duration-300 text-fg-muted group-hover:text-fg h-11 w-11 md:h-12 md:w-12 lg:h-14 lg:w-14"
+          style={{ color: isHovered ? accentColor : undefined }}
+        />
       </motion.div>
 
       {/* Title & Category Details */}
