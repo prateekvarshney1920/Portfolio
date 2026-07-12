@@ -71,9 +71,9 @@ export function TechStack() {
           return (
             <motion.div
               key={tech.name}
-              initial={prefersReducedMotion ? {} : { opacity: 0, scale: 0.8 }}
+              initial={{ opacity: 0, scale: 0.8 }}
               animate={
-                isInView || prefersReducedMotion
+                isInView
                   ? { opacity: 1, scale: 1 }
                   : { opacity: 0, scale: 0.8 }
               }

@@ -4,7 +4,6 @@ import { useRef } from 'react';
 import { motion, useInView, type Variants, type UseInViewOptions } from 'motion/react';
 
 import { DURATION, EASING, STAGGER } from '@/config/motion';
-import { useReducedMotion } from '@/hooks/use-reduced-motion';
 
 /**
  * AnimatedSection
@@ -63,12 +62,6 @@ export function AnimatedSection({
 }: AnimatedSectionProps) {
   const ref = useRef<HTMLDivElement>(null);
   const isInView = useInView(ref, { once: true, margin });
-  const prefersReducedMotion = useReducedMotion();
-
-  if (prefersReducedMotion) {
-    return <div className={className}>{children}</div>;
-  }
-
   const variants = presets[animation];
 
   return (

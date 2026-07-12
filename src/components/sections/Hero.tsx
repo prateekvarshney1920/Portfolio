@@ -46,33 +46,31 @@ export function Hero() {
       />
 
       {/* Floating orbs */}
-      {!prefersReducedMotion && (
-        <div className="pointer-events-none absolute inset-0 overflow-hidden" aria-hidden="true">
-          <motion.div
-            className="absolute -top-32 -left-32 size-96 rounded-full opacity-20 blur-[100px]"
-            style={{ background: 'var(--brand-blue)' }}
-            animate={{ x: [0, 60, 0], y: [0, 40, 0] }}
-            transition={{ duration: 20, repeat: Infinity, ease: 'linear' }}
-          />
-          <motion.div
-            className="absolute -right-32 -bottom-32 size-96 rounded-full opacity-15 blur-[100px]"
-            style={{ background: 'var(--brand-violet)' }}
-            animate={{ x: [0, -40, 0], y: [0, -60, 0] }}
-            transition={{ duration: 25, repeat: Infinity, ease: 'linear' }}
-          />
-          <motion.div
-            className="absolute top-1/3 left-1/2 size-64 -translate-x-1/2 rounded-full opacity-10 blur-[80px]"
-            style={{ background: 'var(--brand-cyan)' }}
-            animate={{ scale: [1, 1.2, 1], opacity: [0.1, 0.18, 0.1] }}
-            transition={{ duration: 15, repeat: Infinity, ease: 'linear' }}
-          />
-        </div>
-      )}
+      <div className="pointer-events-none absolute inset-0 overflow-hidden" aria-hidden="true">
+        <motion.div
+          className="absolute -top-32 -left-32 size-96 rounded-full opacity-20 blur-[100px]"
+          style={{ background: 'var(--brand-blue)' }}
+          animate={{ x: [0, 60, 0], y: [0, 40, 0] }}
+          transition={{ duration: 20, repeat: Infinity, ease: 'linear' }}
+        />
+        <motion.div
+          className="absolute -right-32 -bottom-32 size-96 rounded-full opacity-15 blur-[100px]"
+          style={{ background: 'var(--brand-violet)' }}
+          animate={{ x: [0, -40, 0], y: [0, -60, 0] }}
+          transition={{ duration: 25, repeat: Infinity, ease: 'linear' }}
+        />
+        <motion.div
+          className="absolute top-1/3 left-1/2 size-64 -translate-x-1/2 rounded-full opacity-10 blur-[80px]"
+          style={{ background: 'var(--brand-cyan)' }}
+          animate={{ scale: [1, 1.2, 1], opacity: [0.1, 0.18, 0.1] }}
+          transition={{ duration: 15, repeat: Infinity, ease: 'linear' }}
+        />
+      </div>
 
       <Container className="relative z-[1] flex flex-col items-center text-center">
         {/* Eyebrow */}
         <motion.div
-          initial={prefersReducedMotion ? {} : { opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: DURATION.slow, ease: EASING.outSoft, delay: 0.2 }}
         >
@@ -84,19 +82,19 @@ export function Hero() {
 
         {/* Name */}
         <motion.h1
-          initial={prefersReducedMotion ? {} : { opacity: 0, y: 30 }}
+          initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: DURATION.slow, ease: EASING.outSoft, delay: 0.35 }}
           className="font-display text-display-xl mb-4 font-bold tracking-tight md:mb-6"
         >
-          <GradientText animate={prefersReducedMotion ? 'none' : 'shimmer'}>
+          <GradientText animate="shimmer">
             {personalInfo.name}
           </GradientText>
         </motion.h1>
 
         {/* Animated Role Rotation */}
         <motion.div
-          initial={prefersReducedMotion ? {} : { opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: DURATION.slow, ease: EASING.outSoft, delay: 0.5 }}
           className="mb-6 h-10 md:mb-8 md:h-12"
@@ -104,9 +102,9 @@ export function Hero() {
           <AnimatePresence mode="wait">
             <motion.span
               key={roleIndex}
-              initial={prefersReducedMotion ? {} : { opacity: 0, y: 10 }}
+              initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
-              exit={prefersReducedMotion ? {} : { opacity: 0, y: -10 }}
+              exit={{ opacity: 0, y: -10 }}
               transition={{ duration: DURATION.base, ease: EASING.standard }}
               className="text-fg-secondary block text-xl font-medium md:text-2xl lg:text-3xl"
             >
@@ -117,7 +115,7 @@ export function Hero() {
 
         {/* Tagline */}
         <motion.p
-          initial={prefersReducedMotion ? {} : { opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: DURATION.slow, ease: EASING.outSoft, delay: 0.65 }}
           className="text-fg-secondary text-body-l mb-10 max-w-xl leading-relaxed md:mb-12"
@@ -127,7 +125,7 @@ export function Hero() {
 
         {/* CTAs */}
         <motion.div
-          initial={prefersReducedMotion ? {} : { opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: DURATION.slow, ease: EASING.outSoft, delay: 0.8 }}
           className="flex flex-col items-center gap-4 sm:flex-row"
@@ -150,26 +148,24 @@ export function Hero() {
       </Container>
 
       {/* Scroll Indicator */}
-      {!prefersReducedMotion && (
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 1.5, duration: DURATION.slow }}
-          className="absolute bottom-8 left-1/2 -translate-x-1/2"
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: 1.5, duration: DURATION.slow }}
+        className="absolute bottom-8 left-1/2 -translate-x-1/2"
+      >
+        <motion.button
+          type="button"
+          onClick={() => handleScroll('#about')}
+          animate={{ y: [0, 8, 0] }}
+          transition={{ duration: 2, repeat: Infinity, ease: 'easeInOut' }}
+          className="text-fg-muted hover:text-fg flex flex-col items-center gap-2 transition-colors"
+          aria-label="Scroll to content"
         >
-          <motion.button
-            type="button"
-            onClick={() => handleScroll('#about')}
-            animate={{ y: [0, 8, 0] }}
-            transition={{ duration: 2, repeat: Infinity, ease: 'easeInOut' }}
-            className="text-fg-muted hover:text-fg flex flex-col items-center gap-2 transition-colors"
-            aria-label="Scroll to content"
-          >
-            <span className="text-caption font-mono uppercase tracking-widest">Scroll</span>
-            <ArrowDown className="size-4" />
-          </motion.button>
-        </motion.div>
-      )}
+          <span className="text-caption font-mono uppercase tracking-widest">Scroll</span>
+          <ArrowDown className="size-4" />
+        </motion.button>
+      </motion.div>
     </section>
   );
 }

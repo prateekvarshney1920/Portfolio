@@ -4,7 +4,6 @@ import { useRef } from 'react';
 import { motion, useInView } from 'motion/react';
 import { cn } from '@/lib/utils';
 import { DURATION, EASING } from '@/config/motion';
-import { useReducedMotion } from '@/hooks/use-reduced-motion';
 
 /**
  * SkillBar
@@ -24,7 +23,7 @@ export interface SkillBarProps {
 export function SkillBar({ name, level, className }: SkillBarProps) {
   const ref = useRef<HTMLDivElement>(null);
   const isInView = useInView(ref, { once: true, margin: '-40px' });
-  const prefersReducedMotion = useReducedMotion();
+
 
   return (
     <div ref={ref} className={cn('space-y-2', className)}>
@@ -37,12 +36,8 @@ export function SkillBar({ name, level, className }: SkillBarProps) {
           className="h-full rounded-full"
           style={{ backgroundImage: 'var(--gradient-signature)' }}
           initial={{ width: 0 }}
-          animate={{ width: isInView || prefersReducedMotion ? `${level}%` : 0 }}
-          transition={
-            prefersReducedMotion
-              ? { duration: 0 }
-              : { duration: DURATION.cinematic, ease: EASING.outSoft, delay: 0.1 }
-          }
+          animate={{ width: isInView ? `${level}%` : 0 }}
+          transition={{ duration: DURATION.cinematic, ease: EASING.outSoft, delay: 0.1 }}
         />
       </div>
     </div>

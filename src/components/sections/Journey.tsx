@@ -52,7 +52,7 @@ export function Journey() {
             className="h-full w-full origin-top"
             style={{ backgroundImage: 'var(--gradient-signature)' }}
             initial={{ scaleY: 0 }}
-            animate={{ scaleY: isInView || prefersReducedMotion ? 1 : 0 }}
+            animate={{ scaleY: isInView ? 1 : 0 }}
             transition={
               prefersReducedMotion
                 ? { duration: 0 }
@@ -70,9 +70,9 @@ export function Journey() {
             return (
               <motion.div
                 key={milestone.title}
-                initial={prefersReducedMotion ? {} : { opacity: 0, y: 30 }}
+                initial={{ opacity: 0, y: 30 }}
                 animate={
-                  isInView || prefersReducedMotion
+                  isInView
                     ? { opacity: 1, y: 0 }
                     : { opacity: 0, y: 30 }
                 }

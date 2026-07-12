@@ -47,7 +47,7 @@ export function Navbar() {
   return (
     <>
       <motion.header
-        initial={prefersReducedMotion ? {} : { y: -80, opacity: 0 }}
+        initial={{ y: -80, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         transition={{ duration: DURATION.slow, ease: EASING.outSoft, delay: 0.1 }}
         className={cn(
