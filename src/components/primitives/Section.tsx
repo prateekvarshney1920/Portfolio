@@ -21,10 +21,10 @@ import { Container, type ContainerSize } from './Container';
 const sectionVariants = cva('relative w-full', {
   variants: {
     spacing: {
-      /** 96 → 128 → 192px — the standard confident rhythm */
-      default: 'py-24 md:py-32 lg:py-48',
-      /** 64 → 80 → 96px — tighter sections */
-      compact: 'py-16 md:py-20 lg:py-24',
+      /** Compressed premium rhythm - 64px to 96px to 112px */
+      default: 'py-16 md:py-24 lg:py-28',
+      /** Tighter sections */
+      compact: 'py-10 md:py-14 lg:py-18',
       /** no vertical padding (caller controls spacing) */
       none: '',
     },

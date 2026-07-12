@@ -1,17 +1,18 @@
 'use client';
 
 import { useState, type FormEvent } from 'react';
-import { Send, Mail, MapPin, ArrowUpRight } from 'lucide-react';
+import { Send, Mail, MapPin, ArrowUpRight, Github, Linkedin, MessageSquare } from 'lucide-react';
 import { Section, GlassCard, Button } from '@/components/primitives';
-import { AnimatedSection } from '@/components/ui/AnimatedSection';
+import { AnimatedSection, AnimatedItem } from '@/components/ui/AnimatedSection';
 import { personalInfo } from '@/content/data';
 import { siteConfig } from '@/config/site';
+import { motion } from 'motion/react';
 
 /**
- * Contact
+ * Contact Section
  * ---------------------------------------------------------------------------
- * Rebuilt to match the Dribbble reference: centered, cinematic CTA layout
- * with a huge backdrop watermark, large header typography, and a glowing form card.
+ * Completely redesigned premium contact experience featuring a high-end glassmorphism
+ * form, subtle radial gradient glows, animated interactive inputs, and updated links.
  */
 export function Contact() {
   const [formState, setFormState] = useState<'idle' | 'sending' | 'sent'>('idle');
@@ -35,145 +36,211 @@ export function Contact() {
   };
 
   return (
-    <Section id="contact" className="overflow-hidden relative pb-10">
-      {/* Huge Backdrop Watermark */}
-      <div className="absolute inset-0 flex items-center justify-center select-none pointer-events-none z-0 overflow-hidden opacity-5">
-        <span className="font-display text-[15vw] leading-none text-fg uppercase tracking-widest text-center whitespace-nowrap">
-          WHENEVER READY
-        </span>
+    <Section id="contact" className="overflow-hidden relative pt-20 pb-24 md:pb-32">
+      {/* Background Glows */}
+      <div className="pointer-events-none absolute inset-0 select-none overflow-hidden z-0" aria-hidden="true">
+        <div
+          className="absolute -right-40 top-1/4 size-[400px] rounded-full opacity-10 blur-[120px]"
+          style={{ background: 'var(--brand-blue)' }}
+        />
+        <div
+          className="absolute -left-40 bottom-1/4 size-[400px] rounded-full opacity-10 blur-[120px]"
+          style={{ background: 'var(--brand-violet)' }}
+        />
       </div>
 
-      <div className="relative z-10 max-w-4xl mx-auto flex flex-col items-center text-center">
-        {/* Main CTA Headline */}
-        <AnimatedSection className="mb-12">
-          <span className="text-brand-blue font-mono text-[10px] uppercase tracking-[0.2em] mb-4 block">
-            GET IN TOUCH
-          </span>
-          <h2 className="font-display text-display-l uppercase tracking-tight text-fg leading-none max-w-2xl mx-auto">
-            Let&apos;s build something{' '}
-            <span className="italic-accent font-serif italic text-brand-violet block mt-2 lowercase">
-              meaningful together
-            </span>
-          </h2>
-        </AnimatedSection>
+      <div className="relative z-10 max-w-6xl mx-auto px-4">
+        <div className="grid gap-12 lg:grid-cols-12 lg:gap-16 items-start">
+          
+          {/* Column 1: Copy, Watermark, Info Cards (5 cols) */}
+          <div className="lg:col-span-5 space-y-8">
+            <AnimatedSection>
+              <span className="text-brand-blue font-mono text-[10px] uppercase tracking-[0.2em] mb-3 block">
+                GET IN TOUCH
+              </span>
+              <h2 className="font-display text-4xl sm:text-5xl lg:text-6xl uppercase tracking-tight text-fg leading-[1.05]">
+                Let&apos;s build <br className="hidden lg:block" /> something{' '}
+                <span className="italic-accent font-serif italic text-brand-violet block mt-1 lowercase">
+                  meaningful together
+                </span>
+              </h2>
+              <p className="text-fg-secondary text-body-m mt-6 max-w-md leading-relaxed">
+                Have a project in mind, want to collaborate, or just want to say hi? Drop a message or reach out on social media.
+              </p>
+            </AnimatedSection>
 
-        {/* Info Grid & Form Container */}
-        <div className="grid gap-8 w-full md:grid-cols-5 text-left items-start mt-4">
-          {/* Quick Info (2 Columns) */}
-          <AnimatedSection animation="slideLeft" className="md:col-span-2 space-y-6">
-            <div className="space-y-4">
-              <a
-                href={siteConfig.links.email}
-                className="group flex items-center gap-4 transition-colors"
-              >
-                <div className="inline-flex size-10 items-center justify-center rounded-lg bg-[var(--glass-subtle-fill)] border border-[var(--border-muted)] transition-colors duration-200 group-hover:bg-primary/10">
-                  <Mail className="size-4 text-primary" />
-                </div>
-                <div>
-                  <p className="text-fg-muted text-[10px] font-mono uppercase tracking-wider">
-                    Direct Email
-                  </p>
-                  <p className="text-fg-secondary text-body-s transition-colors duration-150 group-hover:text-fg">
-                    {personalInfo.email}
-                  </p>
-                </div>
-              </a>
+            {/* Structured Contact Cards */}
+            <AnimatedSection stagger className="space-y-4 pt-4">
+              <AnimatedItem>
+                <a
+                  href={siteConfig.links.email}
+                  className="group flex items-center gap-4 rounded-xl border border-[var(--glass-subtle-border)] bg-[var(--glass-subtle-fill)] p-4 transition-all duration-300 hover:border-[var(--brand-cyan)] hover:bg-[var(--glass-base-fill)] glow-cyan-hover"
+                >
+                  <div className="inline-flex size-10 items-center justify-center rounded-lg bg-[var(--glass-subtle-fill)] border border-[var(--border-muted)] transition-colors duration-300 group-hover:bg-cyan-500/10">
+                    <Mail className="size-5 text-cyan-400" />
+                  </div>
+                  <div>
+                    <p className="text-fg-muted text-[10px] font-mono uppercase tracking-wider">
+                      Email Address
+                    </p>
+                    <p className="text-fg-secondary text-body-s font-medium transition-colors duration-150 group-hover:text-fg">
+                      {personalInfo.email}
+                    </p>
+                  </div>
+                </a>
+              </AnimatedItem>
 
-              <div className="flex items-center gap-4">
-                <div className="inline-flex size-10 items-center justify-center rounded-lg bg-[var(--glass-subtle-fill)] border border-[var(--border-muted)]">
-                  <MapPin className="size-4 text-primary" />
+              <AnimatedItem>
+                <div className="flex items-center gap-4 rounded-xl border border-[var(--glass-subtle-border)] bg-[var(--glass-subtle-fill)] p-4">
+                  <div className="inline-flex size-10 items-center justify-center rounded-lg bg-[var(--glass-subtle-fill)] border border-[var(--border-muted)]">
+                    <MapPin className="size-5 text-orange-400" />
+                  </div>
+                  <div>
+                    <p className="text-fg-muted text-[10px] font-mono uppercase tracking-wider">
+                      Location
+                    </p>
+                    <p className="text-fg-secondary text-body-s font-medium">
+                      {personalInfo.location}
+                    </p>
+                  </div>
                 </div>
-                <div>
-                  <p className="text-fg-muted text-[10px] font-mono uppercase tracking-wider">
-                    Location
-                  </p>
-                  <p className="text-fg-secondary text-body-s">
-                    {personalInfo.location}
-                  </p>
-                </div>
+              </AnimatedItem>
+            </AnimatedSection>
+
+            {/* Social Connect links */}
+            <AnimatedSection className="pt-6 border-t border-[var(--glass-subtle-border)]">
+              <p className="text-fg-muted text-[10px] font-mono uppercase tracking-widest mb-3">
+                FIND ME ON
+              </p>
+              <div className="flex flex-wrap gap-3">
+                <a
+                  href={siteConfig.links.github}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 rounded-lg bg-[var(--glass-subtle-fill)] border border-[var(--border-muted)] px-4 py-2 text-xs font-mono font-medium text-fg-secondary transition-all duration-300 hover:border-fg hover:text-fg hover:scale-[1.03]"
+                >
+                  <Github className="size-4" /> GITHUB <ArrowUpRight className="size-3 opacity-60" />
+                </a>
+                <a
+                  href={siteConfig.links.linkedin}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 rounded-lg bg-[var(--glass-subtle-fill)] border border-[var(--border-muted)] px-4 py-2 text-xs font-mono font-medium text-fg-secondary transition-all duration-300 hover:border-fg hover:text-fg hover:scale-[1.03]"
+                >
+                  <Linkedin className="size-4" /> LINKEDIN <ArrowUpRight className="size-3 opacity-60" />
+                </a>
+                <a
+                  href={siteConfig.links.twitter}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 rounded-lg bg-[var(--glass-subtle-fill)] border border-[var(--border-muted)] px-4 py-2 text-xs font-mono font-medium text-fg-secondary transition-all duration-300 hover:border-fg hover:text-fg hover:scale-[1.03]"
+                >
+                  <span className="font-bold text-sm leading-none select-none">𝕏</span> TWITTER <ArrowUpRight className="size-3 opacity-60" />
+                </a>
               </div>
-            </div>
+            </AnimatedSection>
+          </div>
 
-            {/* Social Pill Links */}
-            <div className="flex flex-wrap gap-2 pt-4 border-t border-[var(--glass-subtle-border)]">
-              <Button asChild variant="secondary" size="sm" className="font-mono text-[10px] h-8 px-3">
-                <a href={siteConfig.links.github} target="_blank" rel="noopener noreferrer">
-                  GITHUB <ArrowUpRight className="size-3" />
-                </a>
-              </Button>
-              <Button asChild variant="secondary" size="sm" className="font-mono text-[10px] h-8 px-3">
-                <a href={siteConfig.links.linkedin} target="_blank" rel="noopener noreferrer">
-                  LINKEDIN <ArrowUpRight className="size-3" />
-                </a>
-              </Button>
-              <Button asChild variant="secondary" size="sm" className="font-mono text-[10px] h-8 px-3">
-                <a href={siteConfig.links.twitter} target="_blank" rel="noopener noreferrer">
-                  X / TWITTER <ArrowUpRight className="size-3" />
-                </a>
-              </Button>
-            </div>
-          </AnimatedSection>
-
-          {/* Form (3 Columns) */}
-          <AnimatedSection animation="slideRight" className="md:col-span-3 w-full">
-            <GlassCard padding="lg" className="border-[var(--border-muted)] glow-cyan">
-              <form onSubmit={handleSubmit} className="space-y-4">
-                <div className="grid gap-4 sm:grid-cols-2">
-                  <div>
-                    <label htmlFor="contact-name" className="text-fg-secondary font-mono text-[10px] uppercase tracking-wider mb-1.5 block">
-                      Name
-                    </label>
-                    <input
-                      id="contact-name"
-                      name="name"
-                      type="text"
-                      required
-                      placeholder="Your name"
-                      className="text-fg placeholder:text-fg-disabled w-full rounded-md border border-[var(--border-subtle)] bg-[var(--glass-subtle-fill)] px-4 py-2.5 text-sm outline-none transition-colors duration-150 focus:border-primary focus:ring-1 focus:ring-primary/20"
-                    />
-                  </div>
-                  <div>
-                    <label htmlFor="contact-email" className="text-fg-secondary font-mono text-[10px] uppercase tracking-wider mb-1.5 block">
-                      Email
-                    </label>
-                    <input
-                      id="contact-email"
-                      name="email"
-                      type="email"
-                      required
-                      placeholder="you@example.com"
-                      className="text-fg placeholder:text-fg-disabled w-full rounded-md border border-[var(--border-subtle)] bg-[var(--glass-subtle-fill)] px-4 py-2.5 text-sm outline-none transition-colors duration-150 focus:border-primary focus:ring-1 focus:ring-primary/20"
-                    />
-                  </div>
+          {/* Column 2: Redesigned Form with Glassmorphism (7 cols) */}
+          <div className="lg:col-span-7">
+            <AnimatedSection animation="slideRight">
+              <GlassCard
+                padding="lg"
+                className="border-[var(--glass-subtle-border)] bg-[var(--glass-base-fill)] glow-orange relative"
+              >
+                <div className="absolute top-0 right-0 p-4 opacity-10 pointer-events-none">
+                  <MessageSquare className="size-16 text-brand-violet" />
                 </div>
 
-                <div>
-                  <label htmlFor="contact-message" className="text-fg-secondary font-mono text-[10px] uppercase tracking-wider mb-1.5 block">
-                    Message
-                  </label>
-                  <textarea
-                    id="contact-message"
-                    name="message"
-                    required
-                    rows={4}
-                    placeholder="Tell me about your project or inquiry..."
-                    className="text-fg placeholder:text-fg-disabled w-full resize-none rounded-md border border-[var(--border-subtle)] bg-[var(--glass-subtle-fill)] px-4 py-2.5 text-sm outline-none transition-colors duration-150 focus:border-primary focus:ring-1 focus:ring-primary/20"
-                  />
-                </div>
+                <form onSubmit={handleSubmit} className="space-y-6 relative z-10">
+                  <div className="grid gap-6 sm:grid-cols-2">
+                    {/* Name input */}
+                    <div className="relative group">
+                      <label
+                        htmlFor="contact-name"
+                        className="text-fg-secondary font-mono text-[10px] uppercase tracking-wider mb-2 block transition-colors group-focus-within:text-brand-cyan"
+                      >
+                        Your Name
+                      </label>
+                      <div className="relative">
+                        <input
+                          id="contact-name"
+                          name="name"
+                          type="text"
+                          required
+                          placeholder="John Doe"
+                          className="w-full text-fg placeholder:text-fg-disabled/40 rounded-lg border border-[var(--border-subtle)] bg-[var(--glass-subtle-fill)] px-4 py-3 text-sm outline-none transition-all duration-300 focus:border-cyan-500 focus:ring-2 focus:ring-cyan-500/10 focus:bg-[var(--glass-base-fill)]"
+                        />
+                        <div className="absolute bottom-0 left-0 h-[2px] w-0 bg-brand-blue transition-all duration-300 group-focus-within:w-full" />
+                      </div>
+                    </div>
 
-                <Button type="submit" size="md" className="w-full font-mono text-xs uppercase tracking-wider mt-2" isLoading={formState === 'sending'}>
-                  {formState === 'sent' ? (
-                    'Redirecting to mail client...'
-                  ) : (
-                    <>
-                      SEND MESSAGE
-                      <Send className="size-3.5" />
-                    </>
-                  )}
-                </Button>
-              </form>
-            </GlassCard>
-          </AnimatedSection>
+                    {/* Email input */}
+                    <div className="relative group">
+                      <label
+                        htmlFor="contact-email"
+                        className="text-fg-secondary font-mono text-[10px] uppercase tracking-wider mb-2 block transition-colors group-focus-within:text-brand-cyan"
+                      >
+                        Email Address
+                      </label>
+                      <div className="relative">
+                        <input
+                          id="contact-email"
+                          name="email"
+                          type="email"
+                          required
+                          placeholder="john@example.com"
+                          className="w-full text-fg placeholder:text-fg-disabled/40 rounded-lg border border-[var(--border-subtle)] bg-[var(--glass-subtle-fill)] px-4 py-3 text-sm outline-none transition-all duration-300 focus:border-cyan-500 focus:ring-2 focus:ring-cyan-500/10 focus:bg-[var(--glass-base-fill)]"
+                        />
+                        <div className="absolute bottom-0 left-0 h-[2px] w-0 bg-brand-blue transition-all duration-300 group-focus-within:w-full" />
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Message input */}
+                  <div className="relative group">
+                    <label
+                      htmlFor="contact-message"
+                      className="text-fg-secondary font-mono text-[10px] uppercase tracking-wider mb-2 block transition-colors group-focus-within:text-brand-violet"
+                    >
+                      Your Message
+                    </label>
+                    <div className="relative">
+                      <textarea
+                        id="contact-message"
+                        name="message"
+                        required
+                        rows={5}
+                        placeholder="Tell me about your project, timing, and details..."
+                        className="w-full text-fg placeholder:text-fg-disabled/40 resize-none rounded-lg border border-[var(--border-subtle)] bg-[var(--glass-subtle-fill)] px-4 py-3 text-sm outline-none transition-all duration-300 focus:border-orange-500 focus:ring-2 focus:ring-orange-500/10 focus:bg-[var(--glass-base-fill)]"
+                      />
+                      <div className="absolute bottom-0 left-0 h-[2px] w-0 bg-brand-violet transition-all duration-300 group-focus-within:w-full" />
+                    </div>
+                  </div>
+
+                  {/* Submit Button */}
+                  <motion.div whileHover={{ scale: 1.01 }} whileTap={{ scale: 0.99 }}>
+                    <Button
+                      type="submit"
+                      size="lg"
+                      className="w-full font-mono text-xs uppercase tracking-wider bg-gradient-to-r from-brand-blue to-brand-violet border-none hover:opacity-90 h-12 shadow-[0_0_15px_rgba(6,182,212,0.2)]"
+                      isLoading={formState === 'sending'}
+                    >
+                      {formState === 'sent' ? (
+                        'Redirecting to mail client...'
+                      ) : (
+                        <span className="flex items-center justify-center gap-2">
+                          SEND MESSAGE
+                          <Send className="size-4 transition-transform duration-300 group-hover:translate-x-1 group-hover:-translate-y-1" />
+                        </span>
+                      )}
+                    </Button>
+                  </motion.div>
+                </form>
+              </GlassCard>
+            </AnimatedSection>
+          </div>
+
         </div>
       </div>
     </Section>

@@ -3,7 +3,6 @@ import { Footer } from '@/components/layout/Footer';
 import { Hero } from '@/components/sections/Hero';
 import { About } from '@/components/sections/About';
 import { Journey } from '@/components/sections/Journey';
-import { Experience } from '@/components/sections/Experience';
 import { Skills } from '@/components/sections/Skills';
 import { TechStack } from '@/components/sections/TechStack';
 import { Projects } from '@/components/sections/Projects';
@@ -21,7 +20,6 @@ export default function Home() {
         <Hero />
         <About />
         <Journey />
-        <Experience />
         <Skills />
         <TechStack />
         <Projects />

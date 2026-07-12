@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react';
 import Image from 'next/image';
 import { motion } from 'motion/react';
 import { ArrowDown, ArrowRight, Sparkles } from 'lucide-react';
-import { personalInfo } from '@/content/data';
+import { personalInfo, stats } from '@/content/data';
 import { Button, Container } from '@/components/primitives';
 import { DURATION, EASING } from '@/config/motion';
 import { useReducedMotion } from '@/hooks/use-reduced-motion';
@@ -150,7 +150,7 @@ export function Hero() {
                 <path id="circlePath" d="M 50, 50 m -35, 0 a 35,35 0 1,1 70,0 a 35,35 0 1,1 -70,0" fill="none" />
                 <text className="fill-fg font-mono text-[7px] uppercase tracking-[0.16em] font-medium">
                   <textPath href="#circlePath" startOffset="0%">
-                    AI AGENT BUILDER • AUTOMATION SPECIALIST •
+                    AI ENGINEER • ANDROID DEVELOPER • AUTOMATION •
                   </textPath>
                 </text>
               </svg>
@@ -161,7 +161,9 @@ export function Hero() {
           {/* Right Floating Metric Card */}
           <div className="absolute -right-16 top-10 z-20 hidden md:block">
             <div className="glass rounded-xl border border-[var(--glass-base-border)] p-3 shadow-lg glow-orange flex flex-col items-center">
-              <span className="font-display text-2xl text-brand-violet font-bold leading-none">9+</span>
+              <span className="font-display text-2xl text-brand-violet font-bold leading-none">
+                {stats.find((s) => s.label.toLowerCase().includes('project'))?.value ?? '6+'}
+              </span>
               <span className="font-mono text-[9px] text-fg-muted uppercase tracking-wider mt-1">projects live</span>
             </div>
           </div>

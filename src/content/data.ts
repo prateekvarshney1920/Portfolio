@@ -14,16 +14,6 @@ export interface JourneyMilestone {
   readonly icon: string; // Lucide icon name
 }
 
-export interface ExperienceEntry {
-  readonly role: string;
-  readonly company: string;
-  readonly location: string;
-  readonly period: string;
-  readonly description: string;
-  readonly highlights: readonly string[];
-  readonly technologies: readonly string[];
-}
-
 export interface SkillCategory {
   readonly name: string;
   readonly icon: string;
@@ -69,17 +59,17 @@ export interface StatItem {
 
 export const personalInfo = {
   name: 'Prateek Varshney',
-  roles: ['AI Engineer', 'Automation Developer', 'Full-Stack Developer', 'Agent Builder'],
+  roles: [
+    'AI Engineer / Android Developer',
+    'Android Developer',
+    'AI Agent Builder',
+    'Automation Specialist',
+  ],
   tagline: 'Building intelligent systems that think, automate, and scale.',
-  bio: `I'm an AI Engineer who has journeyed from building Android apps to crafting 
-intelligent AI agents and multi-agent systems. My path through mobile development, 
-UI design, and automation engineering has given me a unique perspective — I don't 
-just build AI, I build AI that works beautifully in production.`,
-  bioExtended: `Today, I specialise in building AI agents, workflow automation with n8n, 
-and production-grade AI systems. From a weather app to multi-agent content pipelines, 
-every project has been a step toward building technology that genuinely augments human capability.`,
+  bio: "I am an Android Developer and AI Engineer specializing in building modern, scalable mobile applications and autonomous systems. With expertise in Kotlin, Jetpack Compose, and Firebase, combined with AI agent orchestration and workflow automation, I bridge the gap between design and high-performance engineering.",
+  bioExtended: "Passionate about clean architecture and performance optimization, I have built 10+ Android applications and integrated REST API and Firebase-based systems. I coordinate technical teams, design intuitive user interfaces, and build automated developer tools that turn ideas into production-ready software.",
   location: 'India',
-  email: 'hello@prateekvarshney.dev',
+  email: 'prateekvarshney697@gmail.com',
 } as const;
 
 // ─────────────────────────────────────────────────────────────────────────────
@@ -87,10 +77,10 @@ every project has been a step toward building technology that genuinely augments
 // ─────────────────────────────────────────────────────────────────────────────
 
 export const stats: readonly StatItem[] = [
-  { value: '3+', label: 'Years Experience' },
-  { value: '9+', label: 'Projects Shipped' },
-  { value: '5+', label: 'AI Agents Built' },
-  { value: '10+', label: 'Automations Live' },
+  { value: '1+', label: 'Years Experience' },
+  { value: '6+', label: 'Projects Shipped' },
+  { value: '10+', label: 'Android Apps Built' },
+  { value: '30+', label: 'Students Mentored' },
 ];
 
 // ─────────────────────────────────────────────────────────────────────────────
@@ -123,32 +113,32 @@ export const journeyMilestones: readonly JourneyMilestone[] = [
     year: '2022',
     title: 'Freelance UI Designer',
     description:
-      'Took on freelance UI/UX design projects, sharpening my eye for aesthetics, layout systems, design tokens, and user-centered thinking.',
+      'Designed and delivered user interfaces for a mobile app focused on providing on-demand household services. Collaborated with the client to translate requirements into design.',
     icon: 'Palette',
   },
   {
-    year: '2023',
+    year: '2025',
     title: 'Technical Coordinator',
     description:
-      'Led technical initiatives, coordinated development teams, managed project timelines, and bridged the gap between design and engineering.',
+      'Selected as Technical Coordinator at GeeksforGeeks Club. Led technical initiatives, coordinated development teams, managed project timelines, and mentored 30+ students in Android development, problem-solving, and project building. Collaborated with teams to manage events and workshops.',
     icon: 'Users',
   },
   {
-    year: '2023',
+    year: '2025',
     title: 'Automation Engineer',
     description:
       'Discovered the power of workflow automation with n8n, Zapier, and custom scripts — automating everything from data pipelines to content workflows.',
     icon: 'Workflow',
   },
   {
-    year: '2024',
+    year: '2026',
     title: 'AI Engineer',
     description:
       'Transitioned into AI engineering — building with LLMs, prompt engineering, RAG systems, and integrating AI into production applications.',
     icon: 'Brain',
   },
   {
-    year: '2025',
+    year: '2026',
     title: 'Building AI Agents',
     description:
       'Now building autonomous AI agents and multi-agent systems that can reason, plan, and execute complex tasks — the frontier of applied AI.',
@@ -157,59 +147,7 @@ export const journeyMilestones: readonly JourneyMilestone[] = [
 ];
 
 // ─────────────────────────────────────────────────────────────────────────────
-// Experience
-// ─────────────────────────────────────────────────────────────────────────────
-
-export const experiences: readonly ExperienceEntry[] = [
-  {
-    role: 'AI Engineer & Agent Builder',
-    company: 'Independent',
-    location: 'Remote',
-    period: '2024 – Present',
-    description:
-      'Designing and building AI agents, multi-agent workflows, and production-grade automation systems using LLMs, n8n, and modern AI tooling.',
-    highlights: [
-      'Built multi-agent content pipeline generating marketing campaigns end-to-end',
-      'Developed AI image generation agent with autonomous style selection',
-      'Created content calendar automation reducing planning time by 80%',
-      'Implemented RAG-based virtual assistant for plant care guidance',
-    ],
-    technologies: ['Python', 'TypeScript', 'n8n', 'LangChain', 'OpenAI', 'Next.js', 'Supabase'],
-  },
-  {
-    role: 'Automation Engineer',
-    company: 'Freelance',
-    location: 'Remote',
-    period: '2023 – 2024',
-    description:
-      'Built custom automation workflows for businesses, connecting APIs, databases, and services to eliminate manual processes.',
-    highlights: [
-      'Automated client onboarding workflows saving 15+ hours per week',
-      'Built real-time notification systems across Slack, email, and SMS',
-      'Created data synchronisation pipelines between CRM and marketing tools',
-      'Developed custom n8n nodes for niche API integrations',
-    ],
-    technologies: ['n8n', 'Node.js', 'REST APIs', 'PostgreSQL', 'Webhooks', 'Zapier'],
-  },
-  {
-    role: 'Technical Coordinator & UI Designer',
-    company: 'Freelance',
-    location: 'India',
-    period: '2022 – 2023',
-    description:
-      'Led technical project coordination while delivering freelance UI/UX design work for mobile and web applications.',
-    highlights: [
-      'Coordinated cross-functional teams on 4+ concurrent projects',
-      'Designed and shipped UI for 3 production Android applications',
-      'Established design systems and component libraries for client projects',
-      'Managed sprint planning, code reviews, and technical documentation',
-    ],
-    technologies: ['Figma', 'Kotlin', 'Jetpack Compose', 'Firebase', 'Material Design'],
-  },
-];
-
-// ─────────────────────────────────────────────────────────────────────────────
-// Skills
+// Skills (LangChain removed)
 // ─────────────────────────────────────────────────────────────────────────────
 
 export const skillCategories: readonly SkillCategory[] = [
@@ -221,7 +159,6 @@ export const skillCategories: readonly SkillCategory[] = [
       { name: 'Prompt Engineering', level: 95 },
       { name: 'AI Agents', level: 90 },
       { name: 'RAG Systems', level: 85 },
-      { name: 'LangChain', level: 82 },
     ],
   },
   {
@@ -260,7 +197,7 @@ export const skillCategories: readonly SkillCategory[] = [
 ];
 
 // ─────────────────────────────────────────────────────────────────────────────
-// Tech Stack
+// Tech Stack (LangChain removed)
 // ─────────────────────────────────────────────────────────────────────────────
 
 export const techStack: readonly TechItem[] = [
@@ -276,7 +213,6 @@ export const techStack: readonly TechItem[] = [
   { name: 'Supabase', category: 'Backend', icon: 'Database' },
   { name: 'PostgreSQL', category: 'Database', icon: 'Database' },
   { name: 'n8n', category: 'Automation', icon: 'Workflow' },
-  { name: 'LangChain', category: 'AI', icon: 'Link' },
   { name: 'OpenAI', category: 'AI', icon: 'Brain' },
   { name: 'Docker', category: 'DevOps', icon: 'Container' },
   { name: 'Git', category: 'DevOps', icon: 'GitBranch' },
@@ -285,7 +221,8 @@ export const techStack: readonly TechItem[] = [
 ];
 
 // ─────────────────────────────────────────────────────────────────────────────
-// Projects
+// Projects (Virtual Plant Care Assistant removed, Neon Anime moved to Mobile,
+// CookMate, QRScanner, Music Player, CodeBaseExplainer added)
 // ─────────────────────────────────────────────────────────────────────────────
 
 export const projects: readonly Project[] = [
@@ -300,7 +237,7 @@ entire marketing campaign creation process. It employs specialised AI agents for
 audience segmentation, copywriting, and visual content generation — all orchestrated through n8n 
 workflows. The system takes a product brief and autonomously produces a complete campaign including 
 ad copy, social media posts, email sequences, and visual assets.`,
-    tags: ['AI Agents', 'n8n', 'LangChain', 'OpenAI', 'Multi-Agent'],
+    tags: ['AI Agents', 'n8n', 'OpenAI', 'Multi-Agent'],
     features: [
       'Multi-agent orchestration with specialised roles',
       'Autonomous market research and competitor analysis',
@@ -310,7 +247,7 @@ ad copy, social media posts, email sequences, and visual assets.`,
     ],
     category: 'ai',
     gradient: 'linear-gradient(135deg, #4f7dff 0%, #7c5cff 50%, #22d3ee 100%)',
-    links: { github: 'https://github.com/prateekvarshney' },
+    links: { github: 'https://github.com/prateekvarshney1920' },
     featured: true,
   },
   {
@@ -333,7 +270,7 @@ scoring, it produces consistently high-quality visual content without manual pro
     ],
     category: 'ai',
     gradient: 'linear-gradient(135deg, #7c5cff 0%, #f472b6 50%, #fbbf24 100%)',
-    links: { github: 'https://github.com/prateekvarshney' },
+    links: { github: 'https://github.com/prateekvarshney1920' },
     featured: true,
   },
   {
@@ -356,30 +293,91 @@ requirements (LinkedIn vs. Twitter vs. Instagram) and maintains brand voice cons
     ],
     category: 'ai',
     gradient: 'linear-gradient(135deg, #22d3ee 0%, #4f7dff 50%, #7c5cff 100%)',
-    links: { github: 'https://github.com/prateekvarshney' },
+    links: { github: 'https://github.com/prateekvarshney1920' },
     featured: true,
   },
   {
-    slug: 'virtual-plant-care-assistant',
-    title: 'Virtual Plant Care Assistant',
-    tagline: 'AI-powered plant health advisor with RAG',
+    slug: 'codebase-explainer',
+    title: 'CodeBaseExplainer',
+    tagline: 'AI tool that explains your codebase and repository',
     description:
-      'A conversational AI assistant that provides personalised plant care guidance using Retrieval Augmented Generation (RAG) over a curated botanical knowledge base.',
-    longDescription: `This virtual assistant combines RAG architecture with a carefully curated botanical 
-knowledge base to provide accurate, personalised plant care advice. Users can describe symptoms, 
-upload images, and receive diagnosis and treatment recommendations. The system retrieves relevant 
-botanical information and synthesises it with the LLM's reasoning to produce expert-level guidance.`,
-    tags: ['RAG', 'AI Assistant', 'LangChain', 'Vector DB', 'Python'],
+      'An AI-powered developer tool that analyzes directories and explains code repository layout, dependencies, and file relationships in natural language.',
+    longDescription: `CodeBaseExplainer helps engineering teams onboard and navigate massive repositories. 
+By scanning directory file structures and analyzing files, it generates module explanations, dependency 
+graphs, and import path maps, providing developers with automated natural language walkthroughs.`,
+    tags: ['Python', 'OpenAI API', 'Directory Analysis', 'RAG'],
     features: [
-      'RAG-powered knowledge retrieval from botanical database',
-      'Symptom-based plant diagnosis',
-      'Personalised care schedules based on environment',
-      'Seasonal care adjustment recommendations',
-      'Conversational follow-up for complex diagnoses',
+      'Automated codebase index mapping',
+      'Traces component and model dependencies',
+      'Explains functions, variables, and modules',
+      'Interactive AI chatbot for directory Q&A',
     ],
-    category: 'ai',
-    gradient: 'linear-gradient(135deg, #34d399 0%, #22d3ee 50%, #4f7dff 100%)',
-    links: { github: 'https://github.com/prateekvarshney' },
+    category: 'web',
+    gradient: 'linear-gradient(135deg, #f59e0b 0%, #d97706 100%)',
+    links: { github: 'https://github.com/prateekvarshney1920/CodeBaseExplainer' },
+    featured: false,
+  },
+  {
+    slug: 'cookmate',
+    title: 'CookMate',
+    tagline: 'Modern recipe discovery and sharing Android app',
+    description:
+      'A recipe sharing and discovery app built using Kotlin and Jetpack Compose, showcasing clean architecture, repository and MVVM patterns.',
+    longDescription: `CookMate is a native Android application built entirely in Kotlin and declarative UI patterns 
+using Jetpack Compose. It integrates third-party REST APIs for recipe searches, lists step-by-step guides, 
+and supports client-side favorites caching. Implements MVVM layout architecture.`,
+    tags: ['Kotlin', 'Jetpack Compose', 'MVVM', 'Retrofit', 'Android'],
+    features: [
+      'Dynamic recipe filtering and text search',
+      'Step-by-step cooking steps viewer',
+      'Favorites bookmarking with offline support',
+      'Hilt-based clean separation repository layer',
+    ],
+    category: 'mobile',
+    gradient: 'linear-gradient(135deg, #10b981 0%, #059669 100%)',
+    links: { github: 'https://github.com/prateekvarshney1920/CookMate' },
+    featured: false,
+  },
+  {
+    slug: 'qrscanner',
+    title: 'QRScanner',
+    tagline: 'Fast and lightweight native QR code utility',
+    description:
+      'A native Android QR scanner and generator utility leveraging Jetpack Compose, CameraX, and ZXing.',
+    longDescription: `QRScanner is a fast native utility built to demonstrate hardware integration on Android. 
+Using CameraX with ML Kit analyzers, it detects QR codes in real-time. Features include custom QR creation, 
+history tracking, and material design themes.`,
+    tags: ['Kotlin', 'Jetpack Compose', 'CameraX', 'ZXing', 'Hilt'],
+    features: [
+      'Instant real-time camera scanning detection',
+      'Custom QR code layout styling generator',
+      'History logging with Room database caching',
+      'Light/dark mode system alignment',
+    ],
+    category: 'mobile',
+    gradient: 'linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%)',
+    links: { github: 'https://github.com/prateekvarshney1920/QRScanner' },
+    featured: false,
+  },
+  {
+    slug: 'music-player',
+    title: 'Music Player',
+    tagline: 'Elegant local audio player with Media3',
+    description:
+      'An Android local music player utilizing Jetpack Media3 ExoPlayer and Jetpack Compose for smooth audio playback.',
+    longDescription: `Music Player is a native audio utility implementing material design guidelines. 
+Using Media3 components, it plays audio tracks in a background service, integrates lockscreen controls, 
+reads local device files, and renders smooth sound controls.`,
+    tags: ['Kotlin', 'Jetpack Compose', 'Media3', 'ExoPlayer', 'Hilt'],
+    features: [
+      'Background media service with notification center widgets',
+      'Active audio queue and custom playlist structures',
+      'Headphone plug state listeners and volume ducking',
+      'Elegant animations synced to local playback state',
+    ],
+    category: 'mobile',
+    gradient: 'linear-gradient(135deg, #8b5cf6 0%, #6d28d9 100%)',
+    links: { github: 'https://github.com/prateekvarshney1920' },
     featured: false,
   },
   {
@@ -403,7 +401,7 @@ newsletter automation, analytics aggregation).`,
     ],
     category: 'automation',
     gradient: 'linear-gradient(135deg, #fbbf24 0%, #f472b6 50%, #7c5cff 100%)',
-    links: { github: 'https://github.com/prateekvarshney' },
+    links: { github: 'https://github.com/prateekvarshney1920' },
     featured: false,
   },
   {
@@ -426,7 +424,7 @@ structured error handling, rate limiting, and comprehensive logging.`,
     ],
     category: 'automation',
     gradient: 'linear-gradient(135deg, #f97316 0%, #fbbf24 50%, #34d399 100%)',
-    links: { github: 'https://github.com/prateekvarshney' },
+    links: { github: 'https://github.com/prateekvarshney1920' },
     featured: false,
   },
   {
@@ -449,7 +447,7 @@ Built with a focus on clean architecture and reusable component patterns.`,
     ],
     category: 'web',
     gradient: 'linear-gradient(135deg, #4f7dff 0%, #22d3ee 50%, #34d399 100%)',
-    links: { github: 'https://github.com/prateekvarshney' },
+    links: { github: 'https://github.com/prateekvarshney1920' },
     featured: false,
   },
   {
@@ -470,9 +468,9 @@ Users can search by genre, rating, season, and maintain personalised watchlists 
       'Neon-themed glassmorphism UI design',
       'Responsive grid layout with smooth animations',
     ],
-    category: 'web',
+    category: 'mobile',
     gradient: 'linear-gradient(135deg, #f472b6 0%, #7c5cff 50%, #22d3ee 100%)',
-    links: { github: 'https://github.com/prateekvarshney' },
+    links: { github: 'https://github.com/prateekvarshney1920' },
     featured: false,
   },
   {
@@ -481,10 +479,9 @@ Users can search by genre, rating, season, and maintain personalised watchlists 
     tagline: 'Beautiful weather application with Android native UI',
     description:
       'A native Android weather application built with Kotlin and Jetpack Compose, featuring real-time weather data, 7-day forecasts, and location-based updates.',
-    longDescription: `My first major project — a weather application that showcases clean Android development 
-with Kotlin and Jetpack Compose. It fetches real-time weather data via API, displays current conditions 
-with dynamic weather-themed backgrounds, provides 7-day forecasts with hourly breakdowns, and supports 
-location-based automatic updates. The project represents the foundation of my development journey.`,
+    longDescription: `Developed a native weather app showcasing modern Android standards. Fetches real-time 
+climate data via API calls, structures code using MVVM architecture, and renders fluid layout screens 
+with Compose layouts.`,
     tags: ['Kotlin', 'Jetpack Compose', 'Android', 'REST API', 'Material Design'],
     features: [
       'Real-time weather data from OpenWeatherMap API',
@@ -495,19 +492,18 @@ location-based automatic updates. The project represents the foundation of my de
     ],
     category: 'mobile',
     gradient: 'linear-gradient(135deg, #60a5fa 0%, #4f7dff 50%, #7c5cff 100%)',
-    links: { github: 'https://github.com/prateekvarshney' },
+    links: { github: 'https://github.com/prateekvarshney1920' },
     featured: false,
   },
 ];
 
 // ─────────────────────────────────────────────────────────────────────────────
-// Navigation (derived — keep in sync with siteConfig.nav for convenience)
+// Navigation
 // ─────────────────────────────────────────────────────────────────────────────
 
 export const navLinks = [
   { label: 'About', href: '#about' },
   { label: 'Journey', href: '#journey' },
-  { label: 'Experience', href: '#experience' },
   { label: 'Skills', href: '#skills' },
   { label: 'Projects', href: '#projects' },
   { label: 'Contact', href: '#contact' },
